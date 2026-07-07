@@ -6,450 +6,376 @@
 <title>Реставрація стільниць Київ — Woodart Design</title>
 <meta name="description" content="Професійне відновлення та реставрація стільниць у Києві та передмісті. Вища художня освіта майстрів, стійкі захисні засоби власної розробки, гарантія 2 роки.">
 
-<!-- Tailwind CSS v4 -->
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 <style type="text/tailwindcss">
 @theme {
-  --color-walnut:    #191513;
-  --color-bark:      #2C2420;
-  --color-copper:    #B8734A;
-  --color-oil:       #D4A574;
-  --color-linen:     #F0EAE2;
-  --color-parchment: #FAF6F1;
+  --color-walnut:    #16120F;
+  --color-bark:      #2A221C;
+  --color-copper:    #C47A3C;
+  --color-oil:       #DDA05A;
+  --color-linen:     #EDE6DC;
+  --color-parchment: #F8F4EE;
   --color-ivory:     #FFFCF7;
   --font-display: "Plus Jakarta Sans", sans-serif;
   --font-body: "Outfit", sans-serif;
   --font-mono: "Space Mono", monospace;
 }
 </style>
-
 <style>
-  /* Marquee */
-  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  .marquee-track { display: flex; width: max-content; animation: marquee 32s linear infinite; }
-
-  /* Staggered entrance */
-  @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
-  .rise { animation: rise .8s cubic-bezier(.22,.68,.36,1) both; }
-  .d1 { animation-delay: .06s; } .d2 { animation-delay: .18s; }
-  .d3 { animation-delay: .32s; } .d4 { animation-delay: .46s; }
-
-  /* Status pulse */
-  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
-  .pulse { animation: blink 1.8s ease-in-out infinite; }
-
-  /* FAQ chevron */
-  details[open] .chev { transform: rotate(45deg); }
-  .chev { transition: transform .25s ease; }
-  details > summary { list-style: none; cursor: pointer; }
-  details > summary::-webkit-details-marker { display: none; }
-
-  /* Scroll reveal */
-  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s cubic-bezier(.22,.68,.36,1); }
-  .reveal.visible { opacity: 1; transform: none; }
-
-  /* Focus ring */
-  a:focus-visible, button:focus-visible, summary:focus-visible {
-    outline: 2px solid #B8734A; outline-offset: 3px; border-radius: 4px;
-  }
-
-  /* Mobile menu */
-  body.locked { overflow: hidden; }
-  #overlay { transition: opacity .3s ease; }
-  #overlay.closed { opacity: 0; pointer-events: none; }
-
-  /* Scrollbar hide */
-  .no-bar::-webkit-scrollbar { display: none; }
-  .no-bar { -ms-overflow-style: none; scrollbar-width: none; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .marquee-track, .rise, .pulse { animation: none; }
-    .reveal { opacity: 1; transform: none; transition: none; }
-    html { scroll-behavior: auto; }
-  }
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .marquee-track{display:flex;width:max-content;animation:marquee 30s linear infinite}
+  @keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+  .rise{animation:rise .75s cubic-bezier(.22,.68,.36,1) both}
+  .d1{animation-delay:.05s}.d2{animation-delay:.16s}.d3{animation-delay:.3s}.d4{animation-delay:.44s}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}.pulse{animation:blink 1.6s ease-in-out infinite}
+  details[open] .chev{transform:rotate(45deg)}.chev{transition:transform .2s ease}
+  details>summary{list-style:none;cursor:pointer}details>summary::-webkit-details-marker{display:none}
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .65s ease,transform .65s cubic-bezier(.22,.68,.36,1)}
+  .reveal.vis{opacity:1;transform:none}
+  a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #C47A3C;outline-offset:3px;border-radius:4px}
+  body.locked{overflow:hidden}
+  #ov{transition:opacity .3s ease}#ov.shut{opacity:0;pointer-events:none}
+  .no-bar::-webkit-scrollbar{display:none}.no-bar{-ms-overflow-style:none;scrollbar-width:none}
+  @media(prefers-reduced-motion:reduce){.marquee-track,.rise,.pulse{animation:none}.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 </style>
-
-<!-- Fancybox 5 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
-
-<!-- Alpine.js -->
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
 <body class="bg-walnut text-ivory font-body antialiased">
 
-<!-- ─── NAV ─── -->
+<!-- ══════ NAV ══════ -->
 <header class="sticky top-0 z-50 bg-walnut/92 backdrop-blur-md border-b border-ivory/8">
-  <div class="mx-auto max-w-6xl px-5 sm:px-8 flex items-center justify-between h-[60px]">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8 flex items-center justify-between h-[60px]">
     <a href="#top" class="font-display font-extrabold text-base tracking-tight uppercase">Woodart<span class="text-copper ml-0.5">.</span></a>
     <div class="hidden md:flex items-center gap-7 text-[13px] font-medium tracking-wide">
-      <a href="#story" class="text-ivory/70 hover:text-copper transition-colors">Про нас</a>
-      <a href="#gallery" class="text-ivory/70 hover:text-copper transition-colors">Роботи</a>
-      <a href="#contact" class="text-ivory/70 hover:text-copper transition-colors">Оцінка</a>
-      <a href="#faq" class="text-ivory/70 hover:text-copper transition-colors">FAQ</a>
-      <a href="tel:+380971234567" class="text-ivory/70 hover:text-copper transition-colors font-mono text-xs">+380 97 123 45 67</a>
-      <a href="#contact" class="ml-1 bg-copper text-walnut font-semibold text-xs px-5 py-2.5 rounded-full hover:bg-oil transition-colors">Оцінити безкоштовно</a>
+      <a href="#process" class="text-ivory/60 hover:text-ivory transition-colors">Як ми працюємо</a>
+      <a href="#gallery" class="text-ivory/60 hover:text-ivory transition-colors">Роботи</a>
+      <a href="#compare" class="text-ivory/60 hover:text-ivory transition-colors">Чому ми</a>
+      <a href="#faq" class="text-ivory/60 hover:text-ivory transition-colors">FAQ</a>
+      <a href="tel:+380971234567" class="text-ivory/60 hover:text-ivory transition-colors font-mono text-xs">+380 97 123 45 67</a>
+      <a href="#contact" class="ml-1 bg-copper text-walnut font-bold text-xs px-5 py-2.5 rounded-full hover:bg-oil transition-colors">Оцінити безкоштовно</a>
     </div>
     <button id="burger" class="md:hidden p-1.5 -mr-1.5" aria-label="Меню">
-      <svg id="icOpen" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg id="icO" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       <svg id="icX" class="hidden" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
   </div>
 </header>
 
-<!-- Mobile Overlay -->
-<div id="overlay" class="closed md:hidden fixed inset-0 z-40 bg-walnut/98 backdrop-blur flex flex-col">
+<!-- Mobile overlay -->
+<div id="ov" class="shut md:hidden fixed inset-0 z-40 bg-walnut/98 backdrop-blur flex flex-col">
   <div class="h-[60px] shrink-0"></div>
   <nav class="flex-1 flex flex-col justify-center px-8 gap-1">
-    <a href="#story"   class="ov-link font-display font-bold uppercase text-[7vw] sm:text-3xl py-2 border-b border-ivory/8 hover:text-copper transition-colors">Про нас</a>
-    <a href="#gallery"  class="ov-link font-display font-bold uppercase text-[7vw] sm:text-3xl py-2 border-b border-ivory/8 hover:text-copper transition-colors">Роботи</a>
-    <a href="#contact"  class="ov-link font-display font-bold uppercase text-[7vw] sm:text-3xl py-2 border-b border-ivory/8 hover:text-copper transition-colors">Оцінка</a>
-    <a href="#faq"      class="ov-link font-display font-bold uppercase text-[7vw] sm:text-3xl py-2 border-b border-ivory/8 hover:text-copper transition-colors">FAQ</a>
-    <a href="#contact" class="ov-link mt-6 bg-copper text-walnut font-semibold text-center py-4 rounded-full text-lg">Безкоштовна оцінка</a>
+    <a href="#process" class="ov-l font-display font-bold uppercase text-[7vw] sm:text-3xl py-2 border-b border-ivory/8 hover:text-copper transition-colors">Як ми працюємо</a>
+    <a href="#gallery" class="ov-l font-display font-bold uppercase text-[7vw] sm:text-3xl py-2 border-b border-ivory/8 hover:text-copper transition-colors">Роботи</a>
+    <a href="#compare" class="ov-l font-display font-bold uppercase text-[7vw] sm:text-3xl py-2 border-b border-ivory/8 hover:text-copper transition-colors">Чому ми</a>
+    <a href="#faq" class="ov-l font-display font-bold uppercase text-[7vw] sm:text-3xl py-2 border-b border-ivory/8 hover:text-copper transition-colors">FAQ</a>
+    <a href="#contact" class="ov-l mt-6 bg-copper text-walnut font-bold text-center py-4 rounded-full text-lg">Безкоштовна оцінка</a>
   </nav>
-  <div class="shrink-0 px-8 pb-8 font-mono text-[10px] text-ivory/30 tracking-widest uppercase flex justify-between">
-    <span>Telegram · Viber</span>
-    <span>Київ ✳</span>
+  <div class="shrink-0 px-8 pb-8 font-mono text-[10px] text-ivory/25 tracking-widest uppercase flex justify-between">
+    <span>Telegram · Viber</span><span>Київ та передмістя ✳</span>
   </div>
 </div>
 
-<!-- ─── HERO ─── -->
-<section id="top" class="relative overflow-hidden min-h-[92vh] flex items-end sm:items-center">
-  <!-- BG image + gradient -->
+<!-- ══════ HERO ══════ -->
+<section id="top" class="relative overflow-hidden min-h-[94vh] flex items-end sm:items-center">
   <div class="absolute inset-0 z-0">
-    <img src="images/wood_hero_bg.jpg" alt="" class="w-full h-full object-cover opacity-20 scale-105">
-    <div class="absolute inset-0 bg-gradient-to-t from-walnut via-walnut/85 to-walnut/40"></div>
+    <img src="images/wood_hero_bg.jpg" alt="" class="w-full h-full object-cover opacity-[.18] scale-110">
+    <div class="absolute inset-0 bg-gradient-to-t from-walnut via-walnut/80 to-walnut/30"></div>
   </div>
-  <!-- Warm ambient glow -->
-  <div aria-hidden="true" class="absolute -bottom-40 -left-40 w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full bg-copper/15 blur-[120px] pointer-events-none z-0"></div>
+  <div aria-hidden="true" class="absolute -bottom-48 -left-48 w-[55vw] h-[55vw] max-w-[700px] max-h-[700px] rounded-full bg-copper/20 blur-[140px] pointer-events-none z-0"></div>
+  <div aria-hidden="true" class="absolute -top-32 right-0 w-[30vw] h-[30vw] max-w-[400px] max-h-[400px] rounded-full bg-oil/10 blur-[100px] pointer-events-none z-0"></div>
 
-  <div class="relative z-10 mx-auto max-w-6xl px-5 sm:px-8 pt-16 pb-12 sm:py-24 w-full">
-    <p class="rise d1 inline-flex items-center gap-2 border border-ivory/15 rounded-full px-4 py-1.5 font-mono text-[10px] sm:text-xs tracking-[.18em] uppercase text-ivory/65 bg-walnut/40 backdrop-blur-sm">
+  <div class="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 pt-16 pb-12 sm:py-28 w-full">
+    <p class="rise d1 inline-flex items-center gap-2 border border-ivory/12 rounded-full px-4 py-1.5 font-mono text-[10px] sm:text-xs tracking-[.2em] uppercase text-ivory/55 bg-walnut/50 backdrop-blur-sm">
       <span class="pulse w-1.5 h-1.5 rounded-full bg-copper shrink-0"></span>
-      Приймаємо замовлення · Київ та передмістя
+      Приймаємо замовлення · Київ
     </p>
 
-    <h1 class="rise d2 mt-8 sm:mt-10 font-display font-extrabold leading-[.95] tracking-tight text-[clamp(2.6rem,8vw,5.8rem)] max-w-4xl">
+    <h1 class="rise d2 mt-8 sm:mt-10 font-display font-extrabold leading-[.92] tracking-tight text-[clamp(2.8rem,9vw,6.5rem)] max-w-5xl">
       Повертаємо<br>стільницям<br>
-      <span class="text-copper">характер.</span>
+      <span class="inline-block bg-copper text-walnut px-3 sm:px-5 py-1 -skew-x-2 rounded-sm">характер.</span>
     </h1>
 
-    <p class="rise d3 mt-6 sm:mt-8 max-w-lg text-ivory/65 text-base sm:text-lg leading-relaxed">
-      Реставрація дерев'яних стільниць з масиву та шпону. Майстри з художньою освітою, власні захисні засоби, 2 роки гарантії на покриття.
+    <p class="rise d3 mt-7 sm:mt-9 max-w-lg text-ivory/55 text-base sm:text-[17px] leading-relaxed">
+      Реставрація дерев'яних стільниць з масиву та шпону. Майстри з художньою освітою, засоби власної розробки, офіційна гарантія 2 роки.
     </p>
 
     <div class="rise d3 mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3">
-      <a href="#contact" class="bg-copper text-walnut font-semibold text-center px-8 py-4 rounded-full text-base sm:text-lg hover:bg-oil active:scale-[.98] transition-all duration-200">Оцінити стільницю по фото</a>
-      <a href="#gallery" class="border border-ivory/20 text-center px-8 py-4 rounded-full text-base sm:text-lg hover:border-copper/60 hover:text-copper active:scale-[.98] transition-all duration-200">Дивитись роботи</a>
+      <a href="#contact" class="bg-copper text-walnut font-bold text-center px-8 py-4 rounded-full text-base sm:text-lg hover:bg-oil hover:scale-[1.03] hover:shadow-xl hover:shadow-copper/20 active:scale-[.98] transition-all duration-300">Оцінити стільницю по фото</a>
+      <a href="#gallery" class="border border-ivory/18 text-center px-8 py-4 rounded-full text-base sm:text-lg hover:border-copper/50 hover:text-copper hover:bg-copper/5 hover:scale-[1.03] active:scale-[.98] transition-all duration-300 backdrop-blur-sm">Дивитись роботи →</a>
     </div>
 
-    <!-- Stat row -->
-    <dl class="rise d4 mt-14 sm:mt-18 grid grid-cols-3 gap-4 sm:gap-10 border-t border-ivory/10 pt-6 max-w-xl">
+    <dl class="rise d4 mt-14 sm:mt-20 grid grid-cols-3 gap-4 sm:gap-10 border-t border-ivory/10 pt-7 max-w-2xl">
       <div>
-        <dt class="font-mono text-[10px] sm:text-xs tracking-widest uppercase text-ivory/35">Гарантія</dt>
-        <dd class="mt-1 font-display font-bold text-xl sm:text-2xl text-copper">2 роки</dd>
+        <dt class="font-mono text-[10px] sm:text-xs tracking-widest uppercase text-ivory/30">Гарантія</dt>
+        <dd class="mt-1.5 font-display font-extrabold text-2xl sm:text-3xl text-copper">2 роки</dd>
       </div>
       <div>
-        <dt class="font-mono text-[10px] sm:text-xs tracking-widest uppercase text-ivory/35">Оцінка</dt>
-        <dd class="mt-1 font-display font-bold text-xl sm:text-2xl">15 хв</dd>
+        <dt class="font-mono text-[10px] sm:text-xs tracking-widest uppercase text-ivory/30">Онлайн-оцінка</dt>
+        <dd class="mt-1.5 font-display font-extrabold text-2xl sm:text-3xl">15 хв</dd>
       </div>
       <div>
-        <dt class="font-mono text-[10px] sm:text-xs tracking-widest uppercase text-ivory/35">Майстри</dt>
-        <dd class="mt-1 font-display font-bold text-lg sm:text-2xl">Худ. освіта</dd>
+        <dt class="font-mono text-[10px] sm:text-xs tracking-widest uppercase text-ivory/30">Майстри</dt>
+        <dd class="mt-1.5 font-display font-extrabold text-xl sm:text-3xl leading-tight">Худ.<br class="sm:hidden"> освіта</dd>
       </div>
     </dl>
   </div>
 </section>
 
-<!-- ─── TICKER ─── -->
-<div class="bg-copper text-walnut overflow-hidden py-2.5 border-y border-walnut/20 select-none" aria-hidden="true">
+<!-- ══════ MARQUEE ══════ -->
+<div class="bg-copper text-walnut overflow-hidden py-2.5 select-none" aria-hidden="true">
   <div class="marquee-track font-mono text-[11px] sm:text-xs font-bold tracking-wider uppercase">
     <span class="flex gap-6 pr-6 whitespace-nowrap">
-      <span>Художня освіта кожного майстра</span><span class="text-walnut/40">·</span>
-      <span>Засоби власної розробки</span><span class="text-walnut/40">·</span>
-      <span>Стійкість до хімії та води</span><span class="text-walnut/40">·</span>
-      <span>2 роки письмової гарантії</span><span class="text-walnut/40">·</span>
-      <span>Оцінка вартості по фото за 15 хвилин</span><span class="text-walnut/40">·</span>
+      <span>Художня освіта кожного майстра</span><span class="opacity-40">·</span>
+      <span>Засоби власної розробки</span><span class="opacity-40">·</span>
+      <span>Стійкість до хімії та води</span><span class="opacity-40">·</span>
+      <span>2 роки письмової гарантії</span><span class="opacity-40">·</span>
+      <span>Оцінка за 15 хвилин</span><span class="opacity-40">·</span>
     </span>
     <span class="flex gap-6 pr-6 whitespace-nowrap">
-      <span>Художня освіта кожного майстра</span><span class="text-walnut/40">·</span>
-      <span>Засоби власної розробки</span><span class="text-walnut/40">·</span>
-      <span>Стійкість до хімії та води</span><span class="text-walnut/40">·</span>
-      <span>2 роки письмової гарантії</span><span class="text-walnut/40">·</span>
-      <span>Оцінка вартості по фото за 15 хвилин</span><span class="text-walnut/40">·</span>
+      <span>Художня освіта кожного майстра</span><span class="opacity-40">·</span>
+      <span>Засоби власної розробки</span><span class="opacity-40">·</span>
+      <span>Стійкість до хімії та води</span><span class="opacity-40">·</span>
+      <span>2 роки письмової гарантії</span><span class="opacity-40">·</span>
+      <span>Оцінка за 15 хвилин</span><span class="opacity-40">·</span>
     </span>
   </div>
 </div>
 
-<!-- ─── STORY / ADVANTAGES ─── -->
-<section id="story" class="bg-linen text-bark">
-  <div class="mx-auto max-w-6xl px-5 sm:px-8 py-16 sm:py-28">
+<!-- ══════ BEFORE / AFTER SHOWCASE ══════ -->
+<section class="bg-parchment text-bark">
+  <div class="reveal mx-auto max-w-7xl px-5 sm:px-8 py-16 sm:py-28">
+    <span class="font-mono text-[10px] text-copper tracking-[.25em] uppercase block mb-3">Результат</span>
+    <h2 class="font-display font-extrabold text-[clamp(1.8rem,5vw,3.4rem)] leading-[1.08] tracking-tight">Різниця, яку<br>відчуваєш на дотик.</h2>
+    <p class="mt-4 text-bark/60 max-w-lg">Ми не ховаємо дефекти — ми відтворюємо оригінальний малюнок волокон та природний тон дерева.</p>
 
-    <div class="reveal grid gap-12 lg:grid-cols-2 lg:items-start">
-      <!-- Text -->
-      <div>
-        <span class="font-mono text-[10px] text-copper tracking-[.25em] uppercase block mb-4">Чому ми</span>
-        <h2 class="font-display font-extrabold text-[clamp(1.7rem,4.5vw,3rem)] leading-[1.1] tracking-tight">
-          Не просто лагодимо —<br>відновлюємо характер
-        </h2>
-
-        <div class="mt-8 space-y-5 text-bark/75 text-[15px] sm:text-base leading-relaxed">
-          <p>
-            Ми відмовилися від конвеєра. Кожен реставратор нашої команди має
-            <strong class="text-bark font-semibold">вищу художню освіту</strong> — тому підбір тону,
-            вимальовування волокон та фінальне покриття для нас є художнім процесом, а не механічною роботою.
-          </p>
-          <p>
-            У роботі використовуємо
-            <strong class="text-bark font-semibold border-b-2 border-copper/50">засоби власної розробки</strong>.
-            Наші олії та лаки глибоко інтегруються в структуру дерева і роблять поверхню стійкою
-            до побутової хімії, гарячих тарілок та води — щоденний стрес, якого стільниця зазнає постійно.
-          </p>
-          <p>
-            Тому ми спокійно даємо
-            <strong class="text-copper font-bold text-lg sm:text-xl">2 роки письмової гарантії</strong>
-            на кожну відновлену стільницю.
-          </p>
+    <div class="mt-10 sm:mt-14 grid gap-5 md:grid-cols-2">
+      <!-- BEFORE card -->
+      <article class="group bg-walnut rounded-2xl overflow-hidden border border-bark/10 hover:shadow-2xl hover:shadow-copper/10 transition-all duration-500 hover:-translate-y-1">
+        <div class="relative aspect-[3/2] overflow-hidden">
+          <a href="images/wood_before.jpg" data-fancybox="ba">
+            <img src="images/wood_before.jpg" alt="До реставрації" class="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-walnut/80 via-transparent to-transparent"></div>
+          </a>
+          <span class="absolute top-4 left-4 bg-walnut/80 backdrop-blur text-ivory font-mono text-[10px] tracking-widest uppercase px-3 py-1.5 rounded-full border border-ivory/10">До</span>
         </div>
-      </div>
-
-      <!-- Video Card -->
-      <div class="reveal group">
-        <div class="bg-parchment rounded-2xl border border-bark/8 overflow-hidden hover:shadow-xl hover:shadow-copper/8 transition-shadow duration-500">
-          <div class="relative aspect-[4/3] bg-walnut overflow-hidden">
-            <img src="images/wood_detail.jpg" alt="Процес реставрації" class="w-full h-full object-cover opacity-90 group-hover:scale-[1.03] transition-transform duration-700">
-            <a href="https://www.youtube.com/watch?v=1F_47Y4wQn8" data-fancybox="video"
-               class="absolute inset-0 flex items-center justify-center bg-walnut/15 group-hover:bg-walnut/30 transition-colors duration-300">
-              <div class="w-14 h-14 sm:w-16 sm:h-16 bg-ivory text-walnut rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-current translate-x-[2px]" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-              </div>
-            </a>
-          </div>
-          <div class="p-5">
-            <p class="font-mono text-[10px] tracking-widest text-bark/40 uppercase">Відео · 2 хв</p>
-            <p class="font-display font-bold text-sm mt-1">Як працюють наші реставратори</p>
-          </div>
+        <div class="p-5">
+          <p class="text-ivory/50 text-sm leading-relaxed">Подряпини, сліди від гарячого, потертий лак. Стільниця втратила свій природний характер.</p>
         </div>
-      </div>
+      </article>
+      <!-- AFTER card -->
+      <article class="group bg-walnut rounded-2xl overflow-hidden border border-bark/10 hover:shadow-2xl hover:shadow-copper/10 transition-all duration-500 hover:-translate-y-1">
+        <div class="relative aspect-[3/2] overflow-hidden">
+          <a href="images/wood_after.jpg" data-fancybox="ba">
+            <img src="images/wood_after.jpg" alt="Після реставрації" class="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-walnut/80 via-transparent to-transparent"></div>
+          </a>
+          <span class="absolute top-4 left-4 bg-copper text-walnut font-mono text-[10px] tracking-widest uppercase px-3 py-1.5 rounded-full font-bold">Після</span>
+        </div>
+        <div class="p-5">
+          <p class="text-ivory/50 text-sm leading-relaxed">Відтворений малюнок волокон, відновлений тон, захисне покриття від води та хімії.</p>
+        </div>
+      </article>
     </div>
-
-    <!-- 3 feature cards -->
-    <div class="reveal mt-16 sm:mt-20 grid gap-4 sm:gap-6 sm:grid-cols-3">
-      <div class="bg-parchment rounded-2xl p-6 sm:p-8 border border-bark/8">
-        <span class="font-mono text-copper text-xs font-bold">01</span>
-        <h3 class="font-display font-bold text-base mt-2">Художня освіта</h3>
-        <p class="mt-2 text-sm text-bark/60 leading-relaxed">Кожен майстер має профільний диплом. Ми відтворюємо малюнок волокон та підбираємо тон, а не просто шпаклюємо.</p>
-      </div>
-      <div class="bg-parchment rounded-2xl p-6 sm:p-8 border border-bark/8">
-        <span class="font-mono text-copper text-xs font-bold">02</span>
-        <h3 class="font-display font-bold text-base mt-2">Власні захисні засоби</h3>
-        <p class="mt-2 text-sm text-bark/60 leading-relaxed">Олії та лаки, що глибоко просочують деревину. Стійкість до води, гарячого посуду та побутової хімії.</p>
-      </div>
-      <div class="bg-parchment rounded-2xl p-6 sm:p-8 border border-bark/8">
-        <span class="font-mono text-copper text-xs font-bold">03</span>
-        <h3 class="font-display font-bold text-base mt-2">2 роки гарантії</h3>
-        <p class="mt-2 text-sm text-bark/60 leading-relaxed">Офіційна письмова гарантія на покриття та відновлені ділянки. Ми впевнені в кожному виробі.</p>
-      </div>
-    </div>
-
   </div>
 </section>
 
-<!-- ─── GALLERY ─── -->
-<section id="gallery" class="bg-linen text-bark border-t border-bark/8 py-10 sm:py-14 overflow-hidden"
-  x-data="{
-    go(dir) { $refs.track.scrollBy({ left: dir * 420, behavior: 'smooth' }) }
-  }">
-  <div class="mx-auto max-w-6xl px-5 sm:px-8">
-    <div class="flex items-end justify-between mb-6">
+<!-- ══════ PROCESS — HOW IT WORKS ══════ -->
+<section id="process" class="bg-linen text-bark border-t border-bark/6">
+  <div class="reveal mx-auto max-w-7xl px-5 sm:px-8 py-16 sm:py-28">
+    <span class="font-mono text-[10px] text-copper tracking-[.25em] uppercase block mb-3">Процес</span>
+    <h2 class="font-display font-extrabold text-[clamp(1.8rem,5vw,3.2rem)] leading-[1.08] tracking-tight">Три кроки до<br>ідеальної стільниці.</h2>
+
+    <div class="mt-10 sm:mt-14 grid gap-5 md:grid-cols-3">
+      <article class="group bg-parchment rounded-2xl p-6 sm:p-8 border-2 border-bark/6 hover:border-copper hover:shadow-2xl hover:shadow-copper/10 hover:-translate-y-1.5 transition-all duration-400 flex flex-col">
+        <div class="mb-5 h-48 sm:h-56 -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 rounded-t-2xl overflow-hidden relative bg-walnut">
+          <img src="images/wood_before.jpg" alt="Фото пошкоджень" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-parchment via-parchment/10 to-transparent"></div>
+        </div>
+        <span class="font-mono text-copper text-xs font-bold">01</span>
+        <h3 class="font-display font-bold text-lg mt-2">Надсилаєте фото</h3>
+        <p class="mt-2 text-sm text-bark/55 leading-relaxed flex-1">Загальний план стільниці + великий план дефектів. У Telegram або Viber — зручно з телефону.</p>
+        <div class="mt-4 font-mono text-[10px] text-copper/70 tracking-widest uppercase">~2 хвилини</div>
+      </article>
+
+      <article class="group bg-parchment rounded-2xl p-6 sm:p-8 border-2 border-bark/6 hover:border-copper hover:shadow-2xl hover:shadow-copper/10 hover:-translate-y-1.5 transition-all duration-400 flex flex-col">
+        <div class="mb-5 h-48 sm:h-56 -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 rounded-t-2xl overflow-hidden relative bg-walnut">
+          <img src="images/wood_detail.jpg" alt="Процес реставрації" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-parchment via-parchment/10 to-transparent"></div>
+        </div>
+        <span class="font-mono text-copper text-xs font-bold">02</span>
+        <h3 class="font-display font-bold text-lg mt-2">Реставруємо на місці</h3>
+        <p class="mt-2 text-sm text-bark/55 leading-relaxed flex-1">Майстер з художньою освітою відтворює малюнок дерева та наносить захисне покриття власної розробки.</p>
+        <div class="mt-4 font-mono text-[10px] text-copper/70 tracking-widest uppercase">1–3 дні</div>
+      </article>
+
+      <article class="group bg-parchment rounded-2xl p-6 sm:p-8 border-2 border-bark/6 hover:border-copper hover:shadow-2xl hover:shadow-copper/10 hover:-translate-y-1.5 transition-all duration-400 flex flex-col">
+        <div class="mb-5 h-48 sm:h-56 -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 rounded-t-2xl overflow-hidden relative bg-walnut">
+          <img src="images/wood_after.jpg" alt="Готова стільниця" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-parchment via-parchment/10 to-transparent"></div>
+        </div>
+        <span class="font-mono text-copper text-xs font-bold">03</span>
+        <h3 class="font-display font-bold text-lg mt-2">Користуєтесь з гарантією</h3>
+        <p class="mt-2 text-sm text-bark/55 leading-relaxed flex-1">Стільниця стійка до води, хімії та гарячого. Офіційна гарантія 2 роки на покриття.</p>
+        <div class="mt-4 font-mono text-[10px] text-copper/70 tracking-widest uppercase">гарантія 24 міс</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ WHY US + COMPARISON CARD ══════ -->
+<section id="compare" class="bg-linen text-bark border-t border-bark/6">
+  <div class="reveal mx-auto max-w-7xl px-5 sm:px-8 py-16 sm:py-28 grid gap-12 lg:grid-cols-2 lg:items-center">
+    <!-- Story -->
+    <div>
+      <span class="font-mono text-[10px] text-copper tracking-[.25em] uppercase block mb-3">Чому ми</span>
+      <h2 class="font-display font-extrabold text-[clamp(1.7rem,4.5vw,3rem)] leading-[1.08] tracking-tight">Чому художня освіта<br>важливіша за досвід</h2>
+      <div class="mt-7 space-y-5 text-bark/70 text-[15px] leading-relaxed">
+        <p>Звичайний майстер зашпаклює скол і залакує. <strong class="text-bark font-semibold">Наш — перемалює волокна дерева пензлем</strong>, відтворюючи природний малюнок так, що місце ремонту стане непомітним навіть при ближньому огляді.</p>
+        <p>Стандартний лак тріскається за рік. <strong class="text-bark font-semibold border-b-2 border-copper/40">Наші олії та лаки власної рецептури</strong> просочують деревину вглиб, а не лягають плівкою зверху — тому покриття тримає воду, кип'яток та побутову хімію.</p>
+      </div>
+
+      <!-- Video trigger -->
+      <a href="https://www.youtube.com/watch?v=1F_47Y4wQn8" data-fancybox="video" class="group mt-8 flex items-center gap-4 w-fit">
+        <div class="w-12 h-12 bg-copper text-walnut rounded-full flex items-center justify-center group-hover:bg-oil group-hover:scale-110 transition-all duration-300 shadow-lg shadow-copper/20">
+          <svg class="w-4 h-4 fill-current translate-x-[1px]" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div>
+          <p class="font-display font-bold text-sm">Дивитись відео процесу</p>
+          <p class="font-mono text-[10px] text-bark/40 tracking-widest uppercase">2 хв · як працюють наші майстри</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Comparison card (dark) -->
+    <div class="bg-walnut text-ivory rounded-2xl p-6 sm:p-10 shadow-2xl shadow-walnut/30">
+      <div class="font-mono text-[10px] tracking-widest text-ivory/35 uppercase mb-7">Порівняння підходів</div>
+      <div class="space-y-7">
+        <div>
+          <div class="flex justify-between text-sm mb-2.5"><span>Звичайний майстер</span><span class="font-mono text-ivory/40 text-xs">Шпаклівка + лак</span></div>
+          <div class="h-3 rounded-full bg-ivory/8"><div class="h-3 rounded-full bg-ivory/20 w-full"></div></div>
+          <div class="mt-2 font-mono text-[10px] text-ivory/25 tracking-wider">Видно ремонт · лак тріскається · без гарантії</div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-2.5"><span>Фабричне перешліфування</span><span class="font-mono text-ivory/40 text-xs">Знімає шар</span></div>
+          <div class="h-3 rounded-full bg-ivory/8"><div class="h-3 rounded-full bg-ivory/30 w-[65%]"></div></div>
+          <div class="mt-2 font-mono text-[10px] text-ivory/25 tracking-wider">Стоншує масив · тьмяний колір · гарантія ~6 міс</div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-2.5"><span class="font-bold">Woodart Design</span><span class="font-mono text-copper text-xs font-bold">Художня реставрація</span></div>
+          <div class="h-3 rounded-full bg-ivory/8"><div class="h-3 rounded-full bg-copper w-[15%] min-w-[28px]"></div></div>
+          <div class="mt-2 font-mono text-[10px] text-copper/60 tracking-wider">Непомітний ремонт · стійке покриття · гарантія 2 роки</div>
+        </div>
+      </div>
+      <p class="mt-8 font-mono text-[10px] text-ivory/20 tracking-wider">✳ Менше інвазивності = кращий результат для дерева</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ GALLERY CAROUSEL ══════ -->
+<section id="gallery" class="bg-parchment text-bark border-t border-bark/6 py-12 sm:py-16 overflow-hidden"
+  x-data="{ go(d){ $refs.t.scrollBy({left:d*440,behavior:'smooth'}) } }">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <div class="flex items-end justify-between mb-7">
       <div>
-        <span class="font-mono text-[10px] text-copper tracking-[.25em] uppercase block mb-2">До / Після</span>
+        <span class="font-mono text-[10px] text-copper tracking-[.25em] uppercase block mb-2">Портфоліо</span>
         <h2 class="font-display font-extrabold text-xl sm:text-2xl tracking-tight">Наші роботи</h2>
       </div>
       <div class="flex gap-2">
-        <button @click="go(-1)" class="w-10 h-10 border border-bark/15 rounded-full flex items-center justify-center hover:bg-bark hover:text-ivory transition-colors" aria-label="Назад">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 2L4 8l6 6"/></svg>
-        </button>
-        <button @click="go(1)" class="w-10 h-10 border border-bark/15 rounded-full flex items-center justify-center hover:bg-bark hover:text-ivory transition-colors" aria-label="Далі">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 2l6 6-6 6"/></svg>
-        </button>
+        <button @click="go(-1)" class="w-10 h-10 border border-bark/12 rounded-full flex items-center justify-center hover:bg-bark hover:text-ivory transition-colors duration-200" aria-label="Назад"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 2L4 8l6 6"/></svg></button>
+        <button @click="go(1)" class="w-10 h-10 border border-bark/12 rounded-full flex items-center justify-center hover:bg-bark hover:text-ivory transition-colors duration-200" aria-label="Далі"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 2l6 6-6 6"/></svg></button>
       </div>
     </div>
   </div>
-
-  <div x-ref="track" class="flex overflow-x-auto snap-x snap-mandatory gap-4 sm:gap-5 scroll-smooth no-bar px-5 sm:px-8 pb-4">
-    <div class="flex-shrink-0 w-[82vw] sm:w-[420px] snap-start group rounded-2xl overflow-hidden aspect-[3/2] bg-walnut border border-bark/10 shadow-sm">
-      <a href="images/wood_before.jpg" data-fancybox="gallery" class="block w-full h-full">
-        <img src="images/wood_before.jpg" alt="До реставрації" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-600">
-      </a>
-    </div>
-    <div class="flex-shrink-0 w-[82vw] sm:w-[420px] snap-start group rounded-2xl overflow-hidden aspect-[3/2] bg-walnut border border-bark/10 shadow-sm">
-      <a href="images/wood_after.jpg" data-fancybox="gallery" class="block w-full h-full">
-        <img src="images/wood_after.jpg" alt="Після реставрації" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-600">
-      </a>
-    </div>
-    <div class="flex-shrink-0 w-[82vw] sm:w-[420px] snap-start group rounded-2xl overflow-hidden aspect-[3/2] bg-walnut border border-bark/10 shadow-sm">
-      <a href="images/wood_detail.jpg" data-fancybox="gallery" class="block w-full h-full">
-        <img src="images/wood_detail.jpg" alt="Процес" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-600">
-      </a>
-    </div>
-    <div class="flex-shrink-0 w-[82vw] sm:w-[420px] snap-start group rounded-2xl overflow-hidden aspect-[3/2] bg-walnut border border-bark/10 shadow-sm">
-      <a href="images/wood_hero_bg.jpg" data-fancybox="gallery" class="block w-full h-full">
-        <img src="images/wood_hero_bg.jpg" alt="Результат в інтер'єрі" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-600">
-      </a>
-    </div>
+  <div x-ref="t" class="flex overflow-x-auto snap-x snap-mandatory gap-4 sm:gap-5 scroll-smooth no-bar px-5 sm:px-8 pb-4">
+    <div class="flex-shrink-0 w-[82vw] sm:w-[440px] snap-start group rounded-2xl overflow-hidden aspect-[3/2] bg-walnut border border-bark/8"><a href="images/wood_before.jpg" data-fancybox="gal" class="block w-full h-full"><img src="images/wood_before.jpg" alt="До" class="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-600"></a></div>
+    <div class="flex-shrink-0 w-[82vw] sm:w-[440px] snap-start group rounded-2xl overflow-hidden aspect-[3/2] bg-walnut border border-bark/8"><a href="images/wood_after.jpg" data-fancybox="gal" class="block w-full h-full"><img src="images/wood_after.jpg" alt="Після" class="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-600"></a></div>
+    <div class="flex-shrink-0 w-[82vw] sm:w-[440px] snap-start group rounded-2xl overflow-hidden aspect-[3/2] bg-walnut border border-bark/8"><a href="images/wood_detail.jpg" data-fancybox="gal" class="block w-full h-full"><img src="images/wood_detail.jpg" alt="Процес" class="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-600"></a></div>
+    <div class="flex-shrink-0 w-[82vw] sm:w-[440px] snap-start group rounded-2xl overflow-hidden aspect-[3/2] bg-walnut border border-bark/8"><a href="images/wood_hero_bg.jpg" data-fancybox="gal" class="block w-full h-full"><img src="images/wood_hero_bg.jpg" alt="Результат" class="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-600"></a></div>
   </div>
 </section>
 
-<!-- ─── CTA / CONTACT ─── -->
-<section id="contact" class="bg-copper text-walnut">
-  <div class="reveal mx-auto max-w-6xl px-5 sm:px-8 py-14 sm:py-20 md:flex md:items-center md:justify-between md:gap-12">
+<!-- ══════ CTA CONTACT ══════ -->
+<section id="contact" class="bg-copper text-walnut relative overflow-hidden">
+  <div aria-hidden="true" class="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full bg-oil/30 blur-[100px] pointer-events-none"></div>
+  <div class="reveal relative z-10 mx-auto max-w-7xl px-5 sm:px-8 py-14 sm:py-20 md:flex md:items-center md:justify-between md:gap-12">
     <div class="max-w-xl">
-      <h2 class="font-display font-extrabold text-[clamp(1.5rem,4vw,2.4rem)] leading-tight tracking-tight">Дізнайтесь вартість за фото — безкоштовно</h2>
-      <p class="mt-3 text-walnut/80 font-medium leading-relaxed">Сфотографуйте стільницю (загальний план + дефекти зблизька) та надішліть у месенджер. Технолог відповість з точним кошторисом за 15 хвилин.</p>
+      <h2 class="font-display font-extrabold text-[clamp(1.6rem,4.5vw,2.6rem)] leading-tight tracking-tight">Дізнайтесь вартість<br>за фото — безкоштовно</h2>
+      <p class="mt-3 text-walnut/75 font-medium leading-relaxed">Сфотографуйте стільницю та надішліть у месенджер. Технолог відповість з кошторисом протягом 15 хвилин.</p>
     </div>
     <div class="mt-8 md:mt-0 flex flex-col sm:flex-row gap-3 shrink-0">
-      <a href="https://t.me/woodart_design_bot" target="_blank" rel="noopener"
-         class="bg-walnut text-ivory font-semibold text-center px-7 py-4 rounded-full hover:bg-bark active:scale-[.98] transition-all duration-200 text-sm sm:text-base">Написати в Telegram</a>
-      <a href="viber://pa?chatURI=woodart_design"
-         class="border-2 border-walnut text-center font-semibold px-7 py-4 rounded-full hover:bg-walnut hover:text-ivory active:scale-[.98] transition-all duration-200 text-sm sm:text-base">Написати у Viber</a>
+      <a href="https://t.me/woodart_design_bot" target="_blank" rel="noopener" class="bg-walnut text-ivory font-bold text-center px-7 py-4 rounded-full hover:bg-bark hover:scale-[1.03] hover:shadow-xl active:scale-[.98] transition-all duration-300 text-sm sm:text-base">Telegram</a>
+      <a href="viber://pa?chatURI=woodart_design" class="border-2 border-walnut text-center font-bold px-7 py-4 rounded-full hover:bg-walnut hover:text-ivory hover:scale-[1.03] active:scale-[.98] transition-all duration-300 text-sm sm:text-base">Viber</a>
+      <a href="tel:+380971234567" class="border-2 border-walnut text-center font-bold px-7 py-4 rounded-full hover:bg-walnut hover:text-ivory hover:scale-[1.03] active:scale-[.98] transition-all duration-300 text-sm sm:text-base">Зателефонувати</a>
     </div>
   </div>
 </section>
 
-<!-- ─── FAQ ─── -->
+<!-- ══════ FAQ ══════ -->
 <section id="faq" class="bg-walnut">
   <div class="reveal mx-auto max-w-3xl px-5 sm:px-8 py-16 sm:py-24">
     <span class="font-mono text-[10px] text-copper tracking-[.25em] uppercase block mb-3 text-center">Допомога</span>
     <h2 class="font-display font-extrabold text-[clamp(1.6rem,4.5vw,2.8rem)] leading-tight tracking-tight text-center">Часті запитання</h2>
 
     <div class="mt-10 divide-y divide-ivory/8 border-y border-ivory/8">
-      <details class="group">
-        <summary class="flex items-center justify-between gap-4 py-5 text-[15px] sm:text-base font-medium hover:text-copper transition-colors">
-          Які дефекти стільниці можна відреставрувати?
-          <span class="chev text-copper text-xl leading-none shrink-0">+</span>
-        </summary>
-        <p class="pb-5 text-ivory/55 text-sm sm:text-[15px] leading-relaxed">
-          Подряпини, сколи, тріщини, плями від гарячого посуду, кави, вина, побутової хімії. Також повністю відновлюємо стерте лакове або масляне покриття.
-        </p>
-      </details>
-      <details class="group">
-        <summary class="flex items-center justify-between gap-4 py-5 text-[15px] sm:text-base font-medium hover:text-copper transition-colors">
-          Хто виконує реставрацію?
-          <span class="chev text-copper text-xl leading-none shrink-0">+</span>
-        </summary>
-        <p class="pb-5 text-ivory/55 text-sm sm:text-[15px] leading-relaxed">
-          Майстри з вищою художньою освітою. Ми заново вимальовуємо волокна дерева та підбираємо оригінальний відтінок, роблячи місце ремонту повністю непомітним.
-        </p>
-      </details>
-      <details class="group">
-        <summary class="flex items-center justify-between gap-4 py-5 text-[15px] sm:text-base font-medium hover:text-copper transition-colors">
-          Чи буде стільниця стійкою після реставрації?
-          <span class="chev text-copper text-xl leading-none shrink-0">+</span>
-        </summary>
-        <p class="pb-5 text-ivory/55 text-sm sm:text-[15px] leading-relaxed">
-          Так. Захисні засоби власної розробки глибоко просочують деревину і протистоять воді, гарячому посуду та побутовій хімії.
-        </p>
-      </details>
-      <details class="group">
-        <summary class="flex items-center justify-between gap-4 py-5 text-[15px] sm:text-base font-medium hover:text-copper transition-colors">
-          Яка гарантія?
-          <span class="chev text-copper text-xl leading-none shrink-0">+</span>
-        </summary>
-        <p class="pb-5 text-ivory/55 text-sm sm:text-[15px] leading-relaxed">
-          2 роки офіційної письмової гарантії на всі виконані роботи з реставрації.
-        </p>
-      </details>
-      <details class="group">
-        <summary class="flex items-center justify-between gap-4 py-5 text-[15px] sm:text-base font-medium hover:text-copper transition-colors">
-          Як зробити фото для онлайн-оцінки?
-          <span class="chev text-copper text-xl leading-none shrink-0">+</span>
-        </summary>
-        <p class="pb-5 text-ivory/55 text-sm sm:text-[15px] leading-relaxed">
-          Зробіть 1–2 фото загального вигляду + великі плани пошкоджень під кутом до світла. Надішліть у Telegram або Viber — технолог відповість за 15 хвилин.
-        </p>
-      </details>
+      <details class="group"><summary class="flex items-center justify-between gap-4 py-5 text-[15px] sm:text-base font-medium hover:text-copper transition-colors">Які дефекти стільниці можна відреставрувати?<span class="chev text-copper text-xl leading-none shrink-0">+</span></summary><p class="pb-5 text-ivory/50 text-sm sm:text-[15px] leading-relaxed">Подряпини, сколи, тріщини, плями від гарячого посуду, кави, вина, побутової хімії. Також повністю відновлюємо стерте лакове або масляне покриття по всій площі.</p></details>
+      <details class="group"><summary class="flex items-center justify-between gap-4 py-5 text-[15px] sm:text-base font-medium hover:text-copper transition-colors">Хто виконує реставрацію?<span class="chev text-copper text-xl leading-none shrink-0">+</span></summary><p class="pb-5 text-ivory/50 text-sm sm:text-[15px] leading-relaxed">Майстри з вищою художньою освітою. Ми заново вимальовуємо волокна дерева та підбираємо оригінальний відтінок, роблячи місце ремонту повністю непомітним.</p></details>
+      <details class="group"><summary class="flex items-center justify-between gap-4 py-5 text-[15px] sm:text-base font-medium hover:text-copper transition-colors">Чи буде стільниця стійкою після реставрації?<span class="chev text-copper text-xl leading-none shrink-0">+</span></summary><p class="pb-5 text-ivory/50 text-sm sm:text-[15px] leading-relaxed">Так. Захисні засоби власної розробки глибоко просочують деревину і протистоять воді, гарячому посуду та побутовій хімії.</p></details>
+      <details class="group"><summary class="flex items-center justify-between gap-4 py-5 text-[15px] sm:text-base font-medium hover:text-copper transition-colors">Яка гарантія?<span class="chev text-copper text-xl leading-none shrink-0">+</span></summary><p class="pb-5 text-ivory/50 text-sm sm:text-[15px] leading-relaxed">2 роки офіційної письмової гарантії на всі виконані роботи з реставрації.</p></details>
+      <details class="group"><summary class="flex items-center justify-between gap-4 py-5 text-[15px] sm:text-base font-medium hover:text-copper transition-colors">Як зробити фото для оцінки?<span class="chev text-copper text-xl leading-none shrink-0">+</span></summary><p class="pb-5 text-ivory/50 text-sm sm:text-[15px] leading-relaxed">1–2 фото загального вигляду + великі плани пошкоджень під кутом до світла. Надішліть у Telegram або Viber — технолог відповість за 15 хвилин.</p></details>
     </div>
   </div>
 </section>
 
-<!-- ─── FOOTER ─── -->
+<!-- ══════ FOOTER ══════ -->
 <footer class="bg-walnut border-t border-ivory/8">
-  <div class="mx-auto max-w-6xl px-5 sm:px-8 py-12 grid gap-8 sm:grid-cols-3 text-sm">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8 py-12 grid gap-8 sm:grid-cols-3 text-sm">
     <div>
       <span class="font-display font-extrabold text-base">Woodart<span class="text-copper">.</span></span>
-      <p class="mt-3 text-ivory/45 max-w-xs leading-relaxed">Реставрація дерев'яних стільниць у Києві та передмісті. Якість, яку відчуваєш на дотик.</p>
+      <p class="mt-3 text-ivory/35 max-w-xs leading-relaxed">Реставрація дерев'яних стільниць у Києві. Якість, яку відчуваєш на дотик.</p>
     </div>
     <div>
-      <p class="font-mono text-[10px] tracking-widest uppercase text-ivory/30 mb-3">Месенджери</p>
-      <ul class="space-y-1.5 text-ivory/60">
+      <p class="font-mono text-[10px] tracking-widest uppercase text-ivory/25 mb-3">Месенджери</p>
+      <ul class="space-y-1.5 text-ivory/50">
         <li><a href="https://t.me/woodart_design_bot" target="_blank" rel="noopener" class="hover:text-copper transition-colors">Telegram</a></li>
         <li><a href="viber://pa?chatURI=woodart_design" class="hover:text-copper transition-colors">Viber</a></li>
       </ul>
     </div>
     <div>
-      <p class="font-mono text-[10px] tracking-widest uppercase text-ivory/30 mb-3">Контакти</p>
-      <p class="text-ivory/60 leading-relaxed">
-        <a href="tel:+380971234567" class="hover:text-copper transition-colors">+380 (97) 123 45 67</a><br>
-        Київ та передмістя<br>
-        Щодня 9:00 — 20:00
-      </p>
+      <p class="font-mono text-[10px] tracking-widest uppercase text-ivory/25 mb-3">Контакти</p>
+      <p class="text-ivory/50 leading-relaxed"><a href="tel:+380971234567" class="hover:text-copper transition-colors">+380 (97) 123 45 67</a><br>Київ та передмістя<br>Щодня 9:00 — 20:00</p>
     </div>
   </div>
-  <div class="border-t border-ivory/8 py-5 text-center font-mono text-[10px] text-ivory/25 tracking-wider">
-    © 2026 Woodart Design
-  </div>
+  <div class="border-t border-ivory/6 py-5 text-center font-mono text-[10px] text-ivory/20 tracking-wider">© 2026 Woodart Design</div>
 </footer>
 
-<!-- Floating messengers -->
+<!-- Floating contacts -->
 <div class="fixed bottom-5 right-5 z-50 flex flex-col gap-2.5">
-  <a href="https://t.me/woodart_design_bot" target="_blank" rel="noopener"
-     class="w-11 h-11 bg-walnut/90 backdrop-blur text-ivory hover:bg-[#229ED9] rounded-full flex items-center justify-center shadow-lg transition-colors duration-200" aria-label="Telegram">
+  <a href="https://t.me/woodart_design_bot" target="_blank" rel="noopener" class="w-11 h-11 bg-walnut/90 backdrop-blur text-ivory hover:bg-[#229ED9] rounded-full flex items-center justify-center shadow-lg transition-colors duration-200" aria-label="Telegram">
     <svg class="w-[18px] h-[18px] fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.14.14 0 00-.07-.2c-.08-.06-.19-.04-.27-.02-.11.02-1.89 1.19-5.33 3.52-.5.35-.96.52-1.37.51-.45-.01-1.31-.25-1.96-.46-.79-.26-1.42-.4-1.36-.84.03-.23.35-.47.95-.71 3.72-1.62 6.2-2.7 7.44-3.23 3.54-1.51 4.27-1.77 4.75-1.78.1 0 .34.03.49.16.12.1.16.24.18.34.02.1.03.3.01.47z"/></svg>
   </a>
-  <a href="viber://pa?chatURI=woodart_design"
-     class="w-11 h-11 bg-walnut/90 backdrop-blur text-ivory hover:bg-[#7360F2] rounded-full flex items-center justify-center shadow-lg transition-colors duration-200" aria-label="Viber">
-    <svg class="w-[18px] h-[18px] fill-current" viewBox="0 0 24 24"><path d="M19.78 14.86c-.74-1.22-2.02-1.8-3.32-1.83-.88-.02-1.6.21-2.1.7-.13-.08-.26-.17-.4-.27-1.15-.84-2.12-1.88-2.88-3.09.28-.31.54-.66.75-1.06.63-.98.66-2.26.1-3.24l-.84-1.48c-.6-.94-1.72-1.48-2.84-1.35C7 3.5 5.86 4.4 5.3 5.7c-.52 1.25-.38 2.65.4 3.73 1.9 3.03 4.54 5.6 7.6 7.42 1 .6 2.25.68 3.32.22 1.15-.5 1.86-1.58 1.92-2.83l-.03-.78c-.02-.85-.35-1.65-1.03-2.15l-.73-.45zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm6.2 12.3c-.04.83-.51 1.55-1.28 1.88-.7.3-1.54.25-2.2-.15-2.6-1.55-4.85-3.73-6.47-6.3-.53-.74-.63-1.68-.27-2.52.36-.88 1.18-1.47 2.12-1.56.76-.08 1.5.28 1.9.92l.84 1.48c.38.67.36 1.5-.06 2.16-.17.27-.37.52-.6.74-.08.08-.12.2-.09.31.06.2.2.4.35.58 1.05 1.24 2.34 2.28 3.76 3.1.18.1.37.2.55.22.1.01.2-.03.26-.1.25-.26.5-.5.73-.78.43-.53 1.15-.65 1.74-.32l.73.45c.46.34.68.88.7 1.45l-.01.53z"/></svg>
+  <a href="viber://pa?chatURI=woodart_design" class="w-11 h-11 bg-walnut/90 backdrop-blur text-ivory hover:bg-[#7360F2] rounded-full flex items-center justify-center shadow-lg transition-colors duration-200" aria-label="Viber">
+    <svg class="w-[18px] h-[18px] fill-current" viewBox="0 0 24 24"><path d="M11.4 0C9.473.028 5.34.344 3.02 2.467 1.302 4.187.5 6.87.5 10.457v.006c0 3.588.803 6.274 2.52 7.99l-.018 3.592s-.037.898.543 1.088c.58.19.834-.207 1.834-1.322.55-.613 1.3-1.51 1.868-2.197 2.608.313 4.615-.07 4.848-.15.538-.182 3.578-.563 4.076-4.594.512-4.145-.247-6.762-1.625-7.94C13.254.754 11.42.003 11.4 0zm.597 1.634c1.588.074 3.06.587 4.09 1.93 1.168.985 1.834 3.2 1.395 6.656-.403 3.248-2.622 3.478-3.06 3.627-.19.064-1.86.39-4.018.176 0 0-1.59 1.914-2.088 2.42-.078.08-.172.112-.238.097-.094-.02-.12-.13-.118-.288l.02-2.636c-1.467-1.447-2.17-3.594-2.17-6.617C5.81 4.38 6.42 2.5 7.847 1.87c1.258-.573 2.834-.256 4.15-.236zM11.4 4.26a.39.39 0 00-.006.78c.873.008 1.64.35 2.22.955.578.61.88 1.388.886 2.278a.39.39 0 10.78-.007c-.008-1.07-.378-2.002-1.07-2.73-.697-.733-1.62-1.12-2.67-1.275a.42.42 0 00-.14 0zm-1.246.86a.393.393 0 00-.162.042c-.356.165-.695.398-.893.735-.175.29-.237.63-.15.97l.007.017c.1.32.253.7.47 1.143.325.666.766 1.39 1.37 2.006l.015.014.014.015c.617.604 1.34 1.045 2.006 1.37.443.217.823.37 1.143.47l.017.007c.34.087.68.025.97-.15.337-.198.57-.537.735-.893a.394.394 0 00-.01-.355l-.783-1.343a.432.432 0 00-.312-.2.47.47 0 00-.34.093l-.514.43c-.132.112-.326.1-.326.1l-.008.002c-1.18-.272-2.144-1.247-2.144-1.247s-.012-.195.098-.328l.43-.514a.47.47 0 00.094-.34.432.432 0 00-.2-.312L10.32 5.16a.393.393 0 00-.166-.04zm2.822.71a.39.39 0 00-.01.78c.44.013.794.187 1.07.478.278.287.434.655.44 1.073a.39.39 0 00.78-.008c-.01-.6-.235-1.14-.64-1.558-.4-.417-.93-.65-1.535-.765a.39.39 0 00-.105 0z"/></svg>
   </a>
 </div>
 
-<!-- ─── SCRIPTS ─── -->
 <script>
-// Mobile menu
-const burger = document.getElementById('burger');
-const overlay = document.getElementById('overlay');
-const icOpen = document.getElementById('icOpen');
-const icX = document.getElementById('icX');
-let open = false;
-
-function toggle(state) {
-  open = state;
-  overlay.classList.toggle('closed', !open);
-  overlay.classList.toggle('hidden', false);
-  icOpen.classList.toggle('hidden', open);
-  icX.classList.toggle('hidden', !open);
-  document.body.classList.toggle('locked', open);
-  burger.setAttribute('aria-expanded', String(open));
-}
-burger.addEventListener('click', () => toggle(!open));
-overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggle(false)));
-document.addEventListener('keydown', e => { if (e.key === 'Escape' && open) toggle(false); });
-
-// Scroll reveal
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-}, { threshold: .08 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-// Fancybox
-Fancybox.bind('[data-fancybox]', { Hash: false });
+const burger=document.getElementById('burger'),ov=document.getElementById('ov'),icO=document.getElementById('icO'),icX=document.getElementById('icX');
+let open=false;
+function tog(s){open=s;ov.classList.toggle('shut',!open);icO.classList.toggle('hidden',open);icX.classList.toggle('hidden',!open);document.body.classList.toggle('locked',open);burger.setAttribute('aria-expanded',String(open))}
+burger.addEventListener('click',()=>tog(!open));
+ov.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>tog(false)));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&open)tog(false)});
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}})},{threshold:.06});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+Fancybox.bind('[data-fancybox]',{Hash:false});
 </script>
 </body>
 </html>
