@@ -62,9 +62,9 @@
   <div class="mx-auto max-w-7xl px-5 sm:px-8 flex items-center justify-between h-[60px]">
     <a href="#top" class="font-display font-extrabold text-base tracking-tight uppercase">Woodart<span class="text-copper ml-0.5">.</span></a>
     <div class="hidden md:flex items-center gap-7 text-[13px] font-medium tracking-wide">
+      <a href="#compare" class="text-ivory/60 hover:text-ivory transition-colors">Чому ми</a>
       <a href="#process" class="text-ivory/60 hover:text-ivory transition-colors">Як ми працюємо</a>
       <a href="#gallery" class="text-ivory/60 hover:text-ivory transition-colors">Роботи</a>
-      <a href="#compare" class="text-ivory/60 hover:text-ivory transition-colors">Чому ми</a>
       <a href="#faq" class="text-ivory/60 hover:text-ivory transition-colors">FAQ</a>
       <a href="tel:+380971234567" class="text-ivory/60 hover:text-ivory transition-colors font-mono text-xs">+380 97 123 45 67</a>
       <a href="#contact" class="ml-1 bg-copper text-walnut font-bold text-xs px-5 py-2.5 rounded-full hover:bg-oil transition-colors">Оцінити безкоштовно</a>
@@ -80,9 +80,9 @@
 <div id="ov" class="shut md:hidden fixed inset-0 z-40 bg-walnut/98 backdrop-blur flex flex-col">
   <div class="h-[60px] shrink-0"></div>
   <nav class="flex-1 flex flex-col justify-center px-8 gap-1">
+    <a href="#compare" class="ov-l font-display font-bold uppercase text-[7vw] sm:text-3xl py-2 border-b border-ivory/8 hover:text-copper transition-colors">Чому ми</a>
     <a href="#process" class="ov-l font-display font-bold uppercase text-[7vw] sm:text-3xl py-2 border-b border-ivory/8 hover:text-copper transition-colors">Як ми працюємо</a>
     <a href="#gallery" class="ov-l font-display font-bold uppercase text-[7vw] sm:text-3xl py-2 border-b border-ivory/8 hover:text-copper transition-colors">Роботи</a>
-    <a href="#compare" class="ov-l font-display font-bold uppercase text-[7vw] sm:text-3xl py-2 border-b border-ivory/8 hover:text-copper transition-colors">Чому ми</a>
     <a href="#faq" class="ov-l font-display font-bold uppercase text-[7vw] sm:text-3xl py-2 border-b border-ivory/8 hover:text-copper transition-colors">FAQ</a>
     <a href="#contact" class="ov-l mt-6 bg-copper text-walnut font-bold text-center py-4 rounded-full text-lg">Безкоштовна оцінка</a>
   </nav>
@@ -122,7 +122,7 @@
 
         <div class="rise d3 mt-7 sm:mt-9 flex flex-col sm:flex-row gap-3">
           <a href="#contact" class="bg-copper text-walnut font-bold text-center px-8 py-4 rounded-full text-base sm:text-lg hover:bg-oil hover:scale-[1.03] hover:shadow-xl hover:shadow-copper/20 active:scale-[.98] transition-all duration-300">Оцінити по фото</a>
-          <a href="#gallery" class="border border-ivory/15 text-center px-8 py-4 rounded-full text-base sm:text-lg hover:border-copper/50 hover:text-copper hover:bg-copper/5 hover:scale-[1.03] active:scale-[.98] transition-all duration-300 backdrop-blur-sm">Роботи →</a>
+          <a href="#compare" class="border border-ivory/15 text-center px-8 py-4 rounded-full text-base sm:text-lg hover:border-copper/50 hover:text-copper hover:bg-copper/5 hover:scale-[1.03] active:scale-[.98] transition-all duration-300 backdrop-blur-sm">Чому ми →</a>
         </div>
 
         <!-- Stats -->
@@ -166,12 +166,6 @@
               <p class="font-mono text-[9px] text-ivory/40 tracking-widest uppercase">До</p>
             </div>
           </div>
-
-          <!-- Decorative stamp -->
-          <div class="absolute -right-4 -top-4 bg-bark/90 backdrop-blur border border-ivory/8 rounded-lg px-3 py-2 shadow-lg">
-            <p class="font-mono text-[9px] text-ivory/30 tracking-wider">50.4501° N, 30.5234° E</p>
-            <p class="font-mono text-[9px] text-copper/60 tracking-wider">Київ · Woodart</p>
-          </div>
         </div>
       </div>
     </div>
@@ -207,8 +201,97 @@
   </div>
 </div>
 
+<!-- ══════ COMPARISON (PROBLEM / SOLUTION) ══════ -->
+<section id="compare" class="bg-walnut border-t border-ivory/5 text-ivory relative overflow-hidden">
+  <div aria-hidden="true" class="absolute top-0 right-0 w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full bg-bark/80 blur-[120px] pointer-events-none z-0"></div>
+  
+  <div class="reveal relative z-10 mx-auto max-w-7xl px-5 sm:px-8 py-16 sm:py-28">
+    <div class="text-center max-w-3xl mx-auto mb-14 sm:mb-20">
+      <span class="font-mono text-[10px] text-copper tracking-[.25em] uppercase block mb-3">Наш підхід</span>
+      <h2 class="font-display font-extrabold text-[clamp(1.8rem,5vw,3.2rem)] leading-[1.08] tracking-tight">Чому художня освіта<br>важливіша за досвід ремонту</h2>
+      <p class="mt-5 text-ivory/60 leading-relaxed text-[15px] sm:text-base">
+        Звичайний майстер просто зашпаклює скол і покриє меблевим лаком. 
+        Наші реставратори <strong class="text-ivory font-semibold">пензлем відтворюють природний малюнок волокон</strong>, роблячи місце ремонту абсолютно непомітним.
+      </p>
+    </div>
+
+    <!-- Comparison Grid -->
+    <div class="grid lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
+      
+      <!-- Option 1: Handyman -->
+      <div class="bg-bark/40 border border-ivory/10 rounded-2xl p-7 sm:p-9 flex flex-col hover:bg-bark/60 transition-colors">
+        <h3 class="font-display font-bold text-xl mb-1 text-ivory/90">Звичайний майстер</h3>
+        <p class="font-mono text-[10px] text-ivory/40 tracking-widest uppercase mb-8 border-b border-ivory/10 pb-4">Швидко та просто</p>
+        <ul class="space-y-5 text-[15px] text-ivory/60 flex-1">
+          <li class="flex gap-3 items-start">
+            <svg class="w-5 h-5 shrink-0 text-red-400/50 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <span>Візуально помітна «пляма» від шпаклівки</span>
+          </li>
+          <li class="flex gap-3 items-start">
+            <svg class="w-5 h-5 shrink-0 text-red-400/50 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <span>Звичайний лак, що тріскається і боїться води</span>
+          </li>
+          <li class="flex gap-3 items-start">
+            <svg class="w-5 h-5 shrink-0 text-red-400/50 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <span>Гарантія лише на словах</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Option 2: Factory -->
+      <div class="bg-bark/40 border border-ivory/10 rounded-2xl p-7 sm:p-9 flex flex-col hover:bg-bark/60 transition-colors">
+        <h3 class="font-display font-bold text-xl mb-1 text-ivory/90">Цех / Фабрика</h3>
+        <p class="font-mono text-[10px] text-ivory/40 tracking-widest uppercase mb-8 border-b border-ivory/10 pb-4">Повне перешліфування</p>
+        <ul class="space-y-5 text-[15px] text-ivory/60 flex-1">
+          <li class="flex gap-3 items-start">
+            <svg class="w-5 h-5 shrink-0 text-amber-500/60 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            <span>Знімається значний шар масиву чи шпону</span>
+          </li>
+          <li class="flex gap-3 items-start">
+            <svg class="w-5 h-5 shrink-0 text-amber-500/60 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            <span>Втрачається унікальна патина та історія дерева</span>
+          </li>
+          <li class="flex gap-3 items-start">
+            <svg class="w-5 h-5 shrink-0 text-amber-500/60 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            <span>Довго. Потрібен демонтаж і транспортування</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Option 3: Woodart -->
+      <div class="bg-copper/[.08] border-2 border-copper rounded-2xl p-7 sm:p-9 flex flex-col relative transform lg:-translate-y-4 shadow-2xl shadow-copper/10 hover:shadow-copper/20 transition-all duration-300">
+        <div class="absolute -top-3 right-6 bg-copper text-walnut text-[9px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full shadow-lg">Наш підхід</div>
+        <h3 class="font-display font-extrabold text-2xl mb-1 text-copper">Woodart Design</h3>
+        <p class="font-mono text-[10px] text-copper/70 tracking-widest uppercase mb-8 border-b border-copper/20 pb-4">Художня реставрація</p>
+        <ul class="space-y-5 text-[15px] font-medium text-ivory/95 flex-1">
+          <li class="flex gap-3 items-start">
+            <span class="text-copper font-bold mt-0.5 leading-none">✓</span>
+            <span>Ювелірне відтворення волокон пензлем</span>
+          </li>
+          <li class="flex gap-3 items-start">
+            <span class="text-copper font-bold mt-0.5 leading-none">✓</span>
+            <span>Олії власної розробки, стійкі до хімії</span>
+          </li>
+          <li class="flex gap-3 items-start">
+            <span class="text-copper font-bold mt-0.5 leading-none">✓</span>
+            <span>Реставрація на місці без демонтажу</span>
+          </li>
+          <li class="flex gap-3 items-start">
+            <span class="text-copper font-bold mt-0.5 leading-none">✓</span>
+            <span>Офіційна письмова гарантія на 2 роки</span>
+          </li>
+        </ul>
+        <a href="https://www.youtube.com/watch?v=1F_47Y4wQn8" data-fancybox="video" class="mt-10 flex items-center justify-center gap-2 bg-copper text-walnut hover:bg-oil py-3.5 rounded-full text-sm font-bold transition-all duration-300 active:scale-[.98]">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          Дивитись відео процесу
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══════ BEFORE / AFTER SHOWCASE ══════ -->
-<section class="bg-parchment text-bark">
+<section class="bg-parchment text-bark relative">
   <div class="reveal mx-auto max-w-7xl px-5 sm:px-8 py-16 sm:py-28">
     <span class="font-mono text-[10px] text-copper tracking-[.25em] uppercase block mb-3">Результат</span>
     <h2 class="font-display font-extrabold text-[clamp(1.8rem,5vw,3.4rem)] leading-[1.08] tracking-tight">Різниця, яку<br>відчуваєш на дотик.</h2>
@@ -284,55 +367,6 @@
         <p class="mt-2 text-sm text-bark/55 leading-relaxed flex-1">Стільниця стійка до води, хімії та гарячого. Офіційна гарантія 2 роки на покриття.</p>
         <div class="mt-4 font-mono text-[10px] text-copper/70 tracking-widest uppercase">гарантія 24 міс</div>
       </article>
-    </div>
-  </div>
-</section>
-
-<!-- ══════ WHY US + COMPARISON CARD ══════ -->
-<section id="compare" class="bg-linen text-bark border-t border-bark/6">
-  <div class="reveal mx-auto max-w-7xl px-5 sm:px-8 py-16 sm:py-28 grid gap-12 lg:grid-cols-2 lg:items-center">
-    <!-- Story -->
-    <div>
-      <span class="font-mono text-[10px] text-copper tracking-[.25em] uppercase block mb-3">Чому ми</span>
-      <h2 class="font-display font-extrabold text-[clamp(1.7rem,4.5vw,3rem)] leading-[1.08] tracking-tight">Чому художня освіта<br>важливіша за досвід</h2>
-      <div class="mt-7 space-y-5 text-bark/70 text-[15px] leading-relaxed">
-        <p>Звичайний майстер зашпаклює скол і залакує. <strong class="text-bark font-semibold">Наш — перемалює волокна дерева пензлем</strong>, відтворюючи природний малюнок так, що місце ремонту стане непомітним навіть при ближньому огляді.</p>
-        <p>Стандартний лак тріскається за рік. <strong class="text-bark font-semibold border-b-2 border-copper/40">Наші олії та лаки власної рецептури</strong> просочують деревину вглиб, а не лягають плівкою зверху — тому покриття тримає воду, кип'яток та побутову хімію.</p>
-      </div>
-
-      <!-- Video trigger -->
-      <a href="https://www.youtube.com/watch?v=1F_47Y4wQn8" data-fancybox="video" class="group mt-8 flex items-center gap-4 w-fit">
-        <div class="w-12 h-12 bg-copper text-walnut rounded-full flex items-center justify-center group-hover:bg-oil group-hover:scale-110 transition-all duration-300 shadow-lg shadow-copper/20">
-          <svg class="w-4 h-4 fill-current translate-x-[1px]" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        </div>
-        <div>
-          <p class="font-display font-bold text-sm">Дивитись відео процесу</p>
-          <p class="font-mono text-[10px] text-bark/40 tracking-widest uppercase">2 хв · як працюють наші майстри</p>
-        </div>
-      </a>
-    </div>
-
-    <!-- Comparison card (dark) -->
-    <div class="bg-walnut text-ivory rounded-2xl p-6 sm:p-10 shadow-2xl shadow-walnut/30">
-      <div class="font-mono text-[10px] tracking-widest text-ivory/35 uppercase mb-7">Порівняння підходів</div>
-      <div class="space-y-7">
-        <div>
-          <div class="flex justify-between text-sm mb-2.5"><span>Звичайний майстер</span><span class="font-mono text-ivory/40 text-xs">Шпаклівка + лак</span></div>
-          <div class="h-3 rounded-full bg-ivory/8"><div class="h-3 rounded-full bg-ivory/20 w-full"></div></div>
-          <div class="mt-2 font-mono text-[10px] text-ivory/25 tracking-wider">Видно ремонт · лак тріскається · без гарантії</div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-2.5"><span>Фабричне перешліфування</span><span class="font-mono text-ivory/40 text-xs">Знімає шар</span></div>
-          <div class="h-3 rounded-full bg-ivory/8"><div class="h-3 rounded-full bg-ivory/30 w-[65%]"></div></div>
-          <div class="mt-2 font-mono text-[10px] text-ivory/25 tracking-wider">Стоншує масив · тьмяний колір · гарантія ~6 міс</div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-2.5"><span class="font-bold">Woodart Design</span><span class="font-mono text-copper text-xs font-bold">Художня реставрація</span></div>
-          <div class="h-3 rounded-full bg-ivory/8"><div class="h-3 rounded-full bg-copper w-[15%] min-w-[28px]"></div></div>
-          <div class="mt-2 font-mono text-[10px] text-copper/60 tracking-wider">Непомітний ремонт · стійке покриття · гарантія 2 роки</div>
-        </div>
-      </div>
-      <p class="mt-8 font-mono text-[10px] text-ivory/20 tracking-wider">✳ Менше інвазивності = кращий результат для дерева</p>
     </div>
   </div>
 </section>
