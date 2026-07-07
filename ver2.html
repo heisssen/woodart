@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="uk" class="scroll-smooth">
+<html lang="uk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
@@ -23,15 +23,10 @@
 
 <style type="text/tailwindcss">
 @theme {
-  --color-walnut:    #16120F;
-  --color-bark:      #2A221C;
-  --color-copper:    #C47A3C;
-  --color-oil:       #DDA05A;
-  --color-linen:     #EDE6DC;
-  --color-parchment: #F8F4EE;
-  --color-ivory:     #FFFCF7;
-  --font-display: "Plus Jakarta Sans", sans-serif;
-  --font-body: "Outfit", sans-serif;
+  --color-black:     #090909;
+  --color-copper:    #D06E24;
+  --color-ivory:     #F4F4F4;
+  --font-display: "Inter", sans-serif;
   --font-mono: "Space Mono", monospace;
 }
 </style>
@@ -42,8 +37,7 @@
   .lenis.lenis-stopped { overflow: hidden; }
 
   @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-  .marquee-track{display:flex;width:max-content;animation:marquee 30s linear infinite}
-  @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}.pulse{animation:blink 1.6s ease-in-out infinite}
+  .marquee-track{display:flex;width:max-content;animation:marquee 20s linear infinite}
   
   details[open] .chev{transform:rotate(45deg)}.chev{transition:transform .2s ease}
   details>summary{list-style:none;cursor:pointer}details>summary::-webkit-details-marker{display:none}
@@ -52,562 +46,335 @@
   #ov{transition:opacity .3s ease}#ov.shut{opacity:0;pointer-events:none}
   .no-bar::-webkit-scrollbar{display:none}.no-bar{-ms-overflow-style:none;scrollbar-width:none}
   
-  .grain::after{content:"";position:absolute;inset:0;opacity:.035;pointer-events:none;z-index:1;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:128px 128px}
-  
-  @keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-12px) rotate(-1deg)}}
-  .hero-card{animation:float 5s ease-in-out infinite}
-  
-  @keyframes scrollDown{0%{opacity:0;transform:translateY(-6px)}40%{opacity:1}100%{opacity:0;transform:translateY(6px)}}
-  .scroll-dot{animation:scrollDown 1.8s ease-in-out infinite}
-
-  /* Text Reveal Masking */
-  .line-mask { overflow: hidden; display: inline-block; vertical-align: top; }
-  .line-mask-inner { display: inline-block; transform: translateY(110%); }
-
   /* GSAP scroll reveal defaults */
-  .gsap-fade-up { opacity: 0; transform: translateY(40px); }
+  .gsap-fade-up { opacity: 0; transform: translateY(30px); }
 
-  /* Custom Cursor */
-  @media (pointer: fine) { 
-    body, a, button { cursor: none !important; } 
+  @media(prefers-reduced-motion:reduce){
+    .marquee-track {animation:none} html{scroll-behavior:auto} .gsap-fade-up {transform:none!important;opacity:1!important}
   }
-  .cursor-dot { position: fixed; top: 0; left: 0; width: 12px; height: 12px; background-color: #C47A3C; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1), height 0.3s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s; display: flex; align-items: center; justify-content: center; mix-blend-mode: difference; }
-  .cursor-text { opacity: 0; color: #16120F; font-family: "Space Mono", monospace; font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: opacity 0.3s; pointer-events: none; }
-  .cursor-dot.active { width: 80px; height: 80px; background-color: #FFFCF7; mix-blend-mode: normal; }
-  .cursor-dot.active .cursor-text { opacity: 1; }
-
-  @media(prefers-reduced-motion:reduce){.marquee-track,.pulse,.hero-card,.scroll-dot{animation:none} html{scroll-behavior:auto} .line-mask-inner, .gsap-fade-up {transform:none!important;opacity:1!important} body, a, button {cursor:auto!important} .cursor-dot{display:none}}
 </style>
 </head>
 
-<body class="bg-walnut text-ivory font-body antialiased">
-
-<!-- Custom Cursor -->
-<div class="cursor-dot hidden md:flex"><span class="cursor-text">View</span></div>
+<body class="bg-black text-ivory font-display antialiased selection:bg-copper selection:text-white">
 
 <!-- ══════ NAV ══════ -->
-<header class="absolute top-0 w-full z-50">
-  <div class="mx-auto max-w-7xl px-5 sm:px-8 flex items-center justify-between h-[80px]">
-    <a href="#top" class="magnetic font-display font-extrabold text-base tracking-tight uppercase">Woodart<span class="text-copper ml-0.5">.</span></a>
-    <div class="hidden md:flex items-center gap-7 text-[13px] font-medium tracking-wide">
-      <a href="#story" class="magnetic text-ivory/60 hover:text-ivory transition-colors">Філософія</a>
-      <a href="#compare" class="magnetic text-ivory/60 hover:text-ivory transition-colors">Чому ми</a>
-      <a href="#gallery" class="magnetic text-ivory/60 hover:text-ivory transition-colors">Роботи</a>
-      <a href="tel:+380971234567" class="magnetic text-ivory/60 hover:text-ivory transition-colors font-mono text-xs">+380 97 123 45 67</a>
-      <a href="#contact" class="magnetic ml-1 bg-copper text-walnut font-bold text-xs px-6 py-3 rounded-full hover:bg-oil transition-colors">Оцінити безкоштовно</a>
+<header class="absolute top-0 w-full z-50 border-b border-ivory/10 bg-black/50 backdrop-blur-md">
+  <div class="mx-auto px-5 sm:px-10 flex items-center justify-between h-[70px]">
+    <a href="#top" class="font-display font-extrabold text-lg tracking-tight uppercase">WOODART</a>
+    <div class="hidden md:flex items-center gap-10 text-[11px] font-bold tracking-[.15em] uppercase text-ivory/60">
+      <a href="#story" class="hover:text-ivory transition-colors">Філософія</a>
+      <a href="#compare" class="hover:text-ivory transition-colors">Підхід</a>
+      <a href="#gallery" class="hover:text-ivory transition-colors">Роботи</a>
+      <a href="tel:+380971234567" class="hover:text-ivory transition-colors">+380 97 123 45 67</a>
+      <a href="#contact" class="text-ivory hover:text-copper transition-colors">Отримати кошторис</a>
     </div>
-    <button id="burger" class="md:hidden p-1.5 -mr-1.5" aria-label="Меню">
-      <svg id="icO" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-      <svg id="icX" class="hidden" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    <button id="burger" class="md:hidden p-1.5 -mr-1.5 text-ivory" aria-label="Меню">
+      <svg id="icO" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg id="icX" class="hidden" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
   </div>
 </header>
 
 <!-- Mobile overlay -->
-<div id="ov" class="shut md:hidden fixed inset-0 z-40 bg-walnut/98 backdrop-blur flex flex-col">
-  <div class="h-[80px] shrink-0"></div>
-  <nav class="flex-1 flex flex-col justify-center px-8 gap-1">
-    <a href="#story" class="ov-l font-display font-bold uppercase text-[7vw] py-2 border-b border-ivory/8 hover:text-copper transition-colors">Філософія</a>
-    <a href="#compare" class="ov-l font-display font-bold uppercase text-[7vw] py-2 border-b border-ivory/8 hover:text-copper transition-colors">Чому ми</a>
-    <a href="#gallery" class="ov-l font-display font-bold uppercase text-[7vw] py-2 border-b border-ivory/8 hover:text-copper transition-colors">Роботи</a>
-    <a href="#faq" class="ov-l font-display font-bold uppercase text-[7vw] py-2 border-b border-ivory/8 hover:text-copper transition-colors">FAQ</a>
-    <a href="#contact" class="ov-l mt-6 bg-copper text-walnut font-bold text-center py-4 rounded-full text-lg">Отримати кошторис</a>
+<div id="ov" class="shut md:hidden fixed inset-0 z-40 bg-black flex flex-col">
+  <div class="h-[70px] shrink-0 border-b border-ivory/10"></div>
+  <nav class="flex-1 flex flex-col justify-center px-8 gap-0 divide-y divide-ivory/10">
+    <a href="#story" class="ov-l font-display font-bold uppercase text-[8vw] tracking-tight py-6 hover:text-copper transition-colors">Філософія</a>
+    <a href="#compare" class="ov-l font-display font-bold uppercase text-[8vw] tracking-tight py-6 hover:text-copper transition-colors">Чому ми</a>
+    <a href="#gallery" class="ov-l font-display font-bold uppercase text-[8vw] tracking-tight py-6 hover:text-copper transition-colors">Роботи</a>
+    <a href="#faq" class="ov-l font-display font-bold uppercase text-[8vw] tracking-tight py-6 hover:text-copper transition-colors">FAQ</a>
+    <a href="#contact" class="ov-l mt-12 bg-ivory text-black font-bold text-center py-5 uppercase text-sm tracking-widest">Отримати кошторис</a>
   </nav>
-  <div class="shrink-0 px-8 pb-8 font-mono text-[10px] text-ivory/25 tracking-widest uppercase flex justify-between">
-    <span>Telegram · Viber</span><span>Київ ✳</span>
-  </div>
 </div>
 
 <!-- ══════ HERO ══════ -->
-<section id="top" class="grain relative overflow-hidden min-h-[96vh] flex items-end lg:items-center">
-  <div class="absolute inset-0 z-0">
-    <img src="images/wood_hero_bg.jpg" alt="" class="w-full h-full object-cover opacity-[.15] scale-110">
-    <div class="absolute inset-0 bg-gradient-to-br from-walnut via-walnut/85 to-bark/60"></div>
-  </div>
-  <div aria-hidden="true" class="absolute -bottom-48 -left-48 w-[60vw] h-[60vw] max-w-[750px] max-h-[750px] rounded-full bg-copper/20 blur-[160px] pointer-events-none z-0"></div>
-  <div aria-hidden="true" class="absolute top-[20%] right-[10%] w-[35vw] h-[35vw] max-w-[450px] max-h-[450px] rounded-full bg-oil/10 blur-[120px] pointer-events-none z-0"></div>
-
-  <div class="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 pt-24 pb-14 sm:pt-32 sm:pb-20 lg:py-32 w-full">
-    <div class="lg:grid lg:grid-cols-[1fr_420px] lg:gap-14 lg:items-center">
-      <!-- Left: text -->
-      <div>
-        <div class="overflow-hidden mb-6 sm:mb-8">
-          <p class="hero-fade inline-flex items-center gap-2.5 border border-ivory/12 rounded-full px-4 py-1.5 font-mono text-[10px] sm:text-xs tracking-[.2em] uppercase text-ivory/60 bg-ivory/[.03] backdrop-blur-sm shadow-xl">
-            <span class="text-[#FFB800] text-sm -mt-0.5">★</span>
-            <span class="text-ivory font-bold">4.9/5</span>
-            <span class="opacity-60 hidden sm:inline">на основі 120+ відгуків</span>
-          </p>
+<section id="top" class="min-h-[100vh] flex items-end lg:items-center pt-24 pb-16 lg:py-0">
+  <div class="mx-auto w-full px-5 sm:px-10">
+    <div class="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-20 lg:items-center">
+      
+      <!-- Left: typography -->
+      <div class="flex flex-col justify-center">
+        <div class="gsap-fade-up inline-block border border-ivory/20 px-3 py-1.5 text-[10px] tracking-[.2em] uppercase text-ivory/60 mb-8 sm:mb-12 w-fit">
+          <span class="text-copper">★</span> 4.9/5 Рейтинг клієнтів
         </div>
 
-        <h1 class="font-display font-extrabold leading-[.9] tracking-tight text-[clamp(2.8rem,8.5vw,6.5rem)]">
-          <div class="line-mask"><div class="line-mask-inner text-ivory">Повертаємо</div></div><br>
-          <div class="line-mask"><div class="line-mask-inner text-ivory">стільницям</div></div><br>
-          <div class="line-mask"><div class="line-mask-inner"><span class="inline-block bg-copper text-walnut px-3 sm:px-5 py-0.5 sm:py-1 -skew-x-3 rounded-sm mt-1 sm:mt-2">характер.</span></div></div>
+        <h1 class="gsap-fade-up font-display font-bold leading-[.85] tracking-[-0.04em] text-[clamp(3.5rem,10vw,8.5rem)] uppercase text-ivory">
+          Художня<br>
+          <span class="text-ivory/40">реставрація</span><br>
+          стільниць<span class="text-copper">.</span>
         </h1>
 
-        <div class="line-mask mt-6 sm:mt-8">
-          <p class="line-mask-inner max-w-md text-ivory/50 text-[15px] sm:text-[17px] leading-relaxed">
-            Художня реставрація стільниць з масиву та шпону. Працюємо без пилу, використовуємо засоби власної розробки з гарантією 2 роки.
-          </p>
-        </div>
+        <p class="gsap-fade-up mt-8 sm:mt-12 max-w-md text-ivory/50 text-[15px] sm:text-[17px] leading-relaxed font-light">
+          Відновлюємо характер дерев'яних поверхонь без пилу та запаху. Працюємо з масивом та шпоном у Києві. Офіційна гарантія 2 роки.
+        </p>
 
-        <div class="overflow-hidden mt-8 sm:mt-10">
-          <div class="hero-fade flex flex-col sm:flex-row gap-3">
-            <a href="#contact" class="magnetic bg-copper text-walnut font-bold text-center px-8 py-4.5 rounded-full text-base sm:text-lg hover:bg-oil transition-all duration-300">Отримати кошторис</a>
-            <a href="#gallery" class="magnetic border border-ivory/15 text-center px-8 py-4.5 rounded-full text-base sm:text-lg hover:border-copper/50 hover:text-copper transition-all duration-300 backdrop-blur-sm">Портфоліо робіт</a>
-          </div>
+        <div class="gsap-fade-up mt-10 sm:mt-14 flex flex-col sm:flex-row gap-4">
+          <a href="#contact" class="bg-ivory text-black font-bold text-center px-10 py-5 text-xs tracking-[.15em] uppercase hover:bg-copper hover:text-white transition-colors duration-300">Отримати кошторис</a>
+          <a href="#gallery" class="border border-ivory/20 text-center px-10 py-5 text-xs tracking-[.15em] uppercase hover:border-ivory transition-colors duration-300">Портфоліо</a>
         </div>
       </div>
 
-      <!-- Right: floating showcase card -->
-      <div class="hidden lg:block relative hero-fade">
-        <div class="hero-card relative">
-          <div class="rounded-2xl overflow-hidden border border-ivory/10 shadow-2xl shadow-walnut/60 bg-bark">
-            <a href="images/wood_after.jpg" data-fancybox="hero" class="cursor-hover">
-              <img src="images/wood_after.jpg" alt="Після реставрації" class="w-full aspect-[4/5] object-cover hover:scale-[1.03] transition-transform duration-700">
-            </a>
-            <div class="p-5 flex items-center justify-between">
-              <div>
-                <p class="font-display font-bold text-sm text-ivory">Дубовий масив</p>
-                <p class="font-mono text-[10px] text-ivory/35 tracking-widest uppercase mt-0.5">Після реставрації</p>
-              </div>
-              <span class="bg-copper/15 text-copper font-mono text-[10px] font-bold tracking-wider uppercase px-3 py-1.5 rounded-full">✓ Готово</span>
-            </div>
-          </div>
-
-          <div class="absolute -left-12 bottom-24 w-36 rounded-xl overflow-hidden border border-ivory/10 shadow-xl shadow-walnut/50 bg-bark" style="animation-delay:1s;animation:float 6s ease-in-out infinite">
-            <img src="images/wood_before.jpg" alt="До" class="w-full aspect-square object-cover">
-            <div class="p-2.5"><p class="font-mono text-[9px] text-ivory/40 tracking-widest uppercase">До реставрації</p></div>
-          </div>
-        </div>
+      <!-- Right: stark image -->
+      <div class="gsap-fade-up hidden lg:block w-full h-[80vh] overflow-hidden bg-[#111]">
+        <img src="images/wood_after.jpg" alt="Після реставрації" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000">
       </div>
-    </div>
-  </div>
 
-  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5 opacity-40">
-    <div class="w-[1px] h-5 bg-gradient-to-b from-transparent to-ivory/40"></div>
-    <div class="w-5 h-8 rounded-full border border-ivory/25 flex items-start justify-center pt-1.5">
-      <div class="scroll-dot w-[3px] h-[3px] rounded-full bg-ivory"></div>
     </div>
-    <p class="font-mono text-[8px] text-ivory/30 tracking-[.3em] uppercase">Scroll</p>
   </div>
 </section>
 
 <!-- ══════ MARQUEE ══════ -->
-<div class="bg-copper text-walnut overflow-hidden py-2.5 sm:py-3 select-none" aria-hidden="true">
-  <div class="marquee-track font-mono text-[11px] sm:text-[13px] font-bold tracking-wider uppercase">
-    <span class="flex gap-6 sm:gap-10 pr-6 sm:pr-10 whitespace-nowrap">
-      <span>Художня освіта майстрів</span><span class="opacity-40">·</span>
-      <span>Реставрація без пилу</span><span class="opacity-40">·</span>
-      <span>Стійкість до хімії та гарячого</span><span class="opacity-40">·</span>
-      <span>2 роки письмової гарантії</span><span class="opacity-40">·</span>
-      <span>350+ врятованих стільниць</span><span class="opacity-40">·</span>
+<div class="border-y border-ivory/10 overflow-hidden py-4 select-none bg-black">
+  <div class="marquee-track font-mono text-[11px] font-bold tracking-[.2em] uppercase text-ivory/40">
+    <span class="flex gap-10 pr-10 whitespace-nowrap">
+      <span>Вища художня освіта</span><span>—</span>
+      <span>Реставрація без пилу</span><span>—</span>
+      <span>Стійкість до хімії</span><span>—</span>
+      <span>2 роки гарантії</span><span>—</span>
+      <span>350+ об'єктів</span><span>—</span>
     </span>
-    <span class="flex gap-6 sm:gap-10 pr-6 sm:pr-10 whitespace-nowrap">
-      <span>Художня освіта майстрів</span><span class="opacity-40">·</span>
-      <span>Реставрація без пилу</span><span class="opacity-40">·</span>
-      <span>Стійкість до хімії та гарячого</span><span class="opacity-40">·</span>
-      <span>2 роки письмової гарантії</span><span class="opacity-40">·</span>
-      <span>350+ врятованих стільниць</span><span class="opacity-40">·</span>
+    <span class="flex gap-10 pr-10 whitespace-nowrap">
+      <span>Вища художня освіта</span><span>—</span>
+      <span>Реставрація বিনা пилу</span><span>—</span>
+      <span>Стійкість до хімії</span><span>—</span>
+      <span>2 роки гарантії</span><span>—</span>
+      <span>350+ об'єктів</span><span>—</span>
     </span>
   </div>
 </div>
 
 <!-- ══════ FOUNDER NOTE / PAIN ══════ -->
-<section id="story" class="bg-linen text-bark border-t border-bark/6 relative overflow-hidden">
-  <div class="mx-auto max-w-7xl px-5 sm:px-8 py-16 sm:py-28 lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
-    <div class="gsap-fade-up relative z-10">
-      <span class="font-mono text-[10px] text-copper tracking-[.25em] uppercase block mb-4">Філософія майстерні</span>
-      <h2 class="font-display font-extrabold text-[clamp(1.8rem,4vw,3rem)] leading-[1.05] tracking-tight">«Дерево вимагає поваги, а не конвеєра»</h2>
-      <div class="mt-7 space-y-5 text-bark/80 text-[16px] leading-relaxed font-medium">
-        <p>Ми створили Woodart, бо втомилися бачити, як дорогі дубові столи псують дешевою шпаклівкою. Знайома ситуація? Стіл за 50,000 гривень виглядає неохайно через одну випадкову краплю хімії чи гарячу чашку.</p>
-        <p>Тому ми відмовилися від фабричного підходу, де тупо знімають міліметри цінного масиву. Наші майстри — це художники. Вони ювелірно <strong class="text-bark font-extrabold border-b border-copper/50">відмальовують втрачені волокна пензлем</strong> просто у вас вдома. Без пилу та бруду.</p>
-      </div>
-      <div class="mt-10 flex items-center gap-4 border-t border-bark/10 pt-6 inline-flex">
-        <div class="w-12 h-12 rounded-full bg-bark/10 text-copper overflow-hidden flex items-center justify-center font-display font-extrabold text-xl border border-bark/5">W.</div>
-        <div>
-          <p class="font-display font-bold text-sm">Команда Woodart Design</p>
-          <p class="font-mono text-[10px] text-bark/50 tracking-widest uppercase">Засновники та технологи</p>
+<section id="story" class="py-20 sm:py-32 border-b border-ivory/10">
+  <div class="mx-auto px-5 sm:px-10 lg:grid lg:grid-cols-2 lg:gap-24 lg:items-start">
+    <div class="gsap-fade-up">
+      <h2 class="font-display font-bold text-[clamp(2rem,5vw,4rem)] leading-[1] tracking-[-0.03em] uppercase">Дерево вимагає поваги, а не конвеєра</h2>
+      <div class="mt-10 border-l border-copper pl-6 sm:pl-10">
+        <p class="font-mono text-[10px] text-ivory/40 tracking-[.2em] uppercase mb-4">Філософія</p>
+        <div class="space-y-6 text-ivory/70 text-[15px] sm:text-[17px] leading-relaxed font-light">
+          <p>Знайома ситуація? Стіл за 50,000 гривень виглядає неохайно через одну випадкову краплю хімії чи гарячу чашку. Більшість майстрів просто зашпаклюють скол і заллють усе дешевим лаком.</p>
+          <p>Ми відмовилися від фабричного підходу. Наші майстри — це художники, які ювелірно <strong class="text-ivory font-medium">відмальовують втрачені волокна пензлем</strong> просто у вас вдома. Без пилу, бруду та запаху. Ми повертаємо дереву його первісну цінність.</p>
         </div>
       </div>
     </div>
-    
-    <div class="mt-12 lg:mt-0 relative gsap-fade-up">
-      <div class="rounded-2xl overflow-hidden aspect-[4/5] sm:aspect-[4/3] lg:aspect-[4/5] bg-walnut relative group border border-bark/5 shadow-2xl shadow-copper/5">
-        <a href="images/wood_detail.jpg" data-fancybox="founder" class="cursor-hover block w-full h-full">
-          <img src="images/wood_detail.jpg" alt="Робота майстра" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700">
-          <div class="absolute inset-0 bg-gradient-to-t from-walnut/60 via-transparent to-transparent"></div>
-        </a>
-        <div class="absolute bottom-6 left-6 right-6 flex justify-between items-end pointer-events-none">
-          <p class="text-ivory font-mono text-[10px] tracking-widest uppercase">Ручна робота</p>
-          <div class="w-10 h-10 border border-ivory/20 rounded-full flex items-center justify-center backdrop-blur-sm bg-walnut/20">
-            <span class="w-1.5 h-1.5 bg-copper rounded-full pulse"></span>
-          </div>
-        </div>
+    <div class="mt-16 lg:mt-0 gsap-fade-up">
+      <div class="w-full aspect-[4/3] bg-[#111] overflow-hidden">
+        <img src="images/wood_detail.jpg" alt="Робота майстра" class="w-full h-full object-cover opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-1000 grayscale hover:grayscale-0">
       </div>
+      <p class="mt-4 font-mono text-[10px] text-ivory/30 tracking-[.15em] uppercase text-right">Деталізація волокон, ручна робота</p>
     </div>
   </div>
 </section>
 
-<!-- ══════ COMPARISON (PROBLEM / SOLUTION) ══════ -->
-<section id="compare" class="bg-walnut border-t border-ivory/5 text-ivory relative overflow-hidden">
-  <div aria-hidden="true" class="absolute top-0 right-0 w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full bg-bark/80 blur-[120px] pointer-events-none z-0"></div>
-  
-  <div class="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 py-16 sm:py-28">
-    <div class="text-center max-w-3xl mx-auto mb-14 sm:mb-20 gsap-fade-up">
-      <span class="font-mono text-[10px] text-copper tracking-[.25em] uppercase block mb-3">Підходи до ремонту</span>
-      <h2 class="font-display font-extrabold text-[clamp(1.8rem,5vw,3.2rem)] leading-[1.08] tracking-tight">Чому художня освіта<br>важливіша за досвід</h2>
-      <p class="mt-5 text-ivory/60 leading-relaxed text-[15px] sm:text-base">
-        Звичайний майстер просто зашпаклює скол і покриє меблевим лаком. 
-        Наші реставратори <strong class="text-ivory font-semibold">пензлем відтворюють природний малюнок волокон</strong>, роблячи місце ремонту абсолютно непомітним.
-      </p>
+<!-- ══════ PROCESS / GRID ══════ -->
+<section id="process" class="py-20 sm:py-32 border-b border-ivory/10 bg-[#060606]">
+  <div class="mx-auto px-5 sm:px-10">
+    <div class="gsap-fade-up flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 sm:mb-24">
+      <h2 class="font-display font-bold text-[clamp(2rem,5vw,4rem)] leading-[1] tracking-[-0.03em] uppercase max-w-2xl">Як ми працюємо</h2>
+      <p class="font-mono text-[10px] text-ivory/40 tracking-[.2em] uppercase">Три прості кроки</p>
     </div>
 
-    <!-- Comparison Grid -->
-    <div class="grid lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
-      
-      <!-- Option 1: Handyman -->
-      <div class="gsap-fade-up bg-bark/40 border border-ivory/10 rounded-2xl p-7 sm:p-9 flex flex-col hover:bg-bark/60 transition-colors">
-        <h3 class="font-display font-bold text-xl mb-1 text-ivory/90">Звичайний майстер</h3>
-        <p class="font-mono text-[10px] text-ivory/40 tracking-widest uppercase mb-8 border-b border-ivory/10 pb-4">Швидко та просто</p>
-        <ul class="space-y-5 text-[15px] text-ivory/60 flex-1">
-          <li class="flex gap-3 items-start">
-            <svg class="w-5 h-5 shrink-0 text-red-400/50 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
-            <span>Візуально помітна «пляма» від шпаклівки</span>
-          </li>
-          <li class="flex gap-3 items-start">
-            <svg class="w-5 h-5 shrink-0 text-red-400/50 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
-            <span>Звичайний лак, що тріскається і боїться води</span>
-          </li>
-          <li class="flex gap-3 items-start">
-            <svg class="w-5 h-5 shrink-0 text-red-400/50 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
-            <span>Гарантія лише на словах</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Option 2: Factory -->
-      <div class="gsap-fade-up bg-bark/40 border border-ivory/10 rounded-2xl p-7 sm:p-9 flex flex-col hover:bg-bark/60 transition-colors" style="transition-delay: 0.1s">
-        <h3 class="font-display font-bold text-xl mb-1 text-ivory/90">Цех / Фабрика</h3>
-        <p class="font-mono text-[10px] text-ivory/40 tracking-widest uppercase mb-8 border-b border-ivory/10 pb-4">Повне перешліфування</p>
-        <ul class="space-y-5 text-[15px] text-ivory/60 flex-1">
-          <li class="flex gap-3 items-start">
-            <svg class="w-5 h-5 shrink-0 text-amber-500/60 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-            <span>Знімається значний шар масиву чи шпону</span>
-          </li>
-          <li class="flex gap-3 items-start">
-            <svg class="w-5 h-5 shrink-0 text-amber-500/60 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-            <span>Втрачається унікальна патина та історія дерева</span>
-          </li>
-          <li class="flex gap-3 items-start">
-            <svg class="w-5 h-5 shrink-0 text-amber-500/60 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-            <span>Довго. Потрібен демонтаж і транспортування</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Option 3: Woodart -->
-      <div class="gsap-fade-up bg-copper/[.08] border-2 border-copper rounded-2xl p-7 sm:p-9 flex flex-col relative transform lg:-translate-y-4 shadow-2xl shadow-copper/10 hover:shadow-copper/20 transition-all duration-300" style="transition-delay: 0.2s">
-        <div class="absolute -top-3 right-6 bg-copper text-walnut text-[9px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full shadow-lg">Наш підхід</div>
-        <h3 class="font-display font-extrabold text-2xl mb-1 text-copper">Woodart Design</h3>
-        <p class="font-mono text-[10px] text-copper/70 tracking-widest uppercase mb-8 border-b border-copper/20 pb-4">Художня реставрація</p>
-        <ul class="space-y-5 text-[15px] font-medium text-ivory/95 flex-1">
-          <li class="flex gap-3 items-start">
-            <span class="text-copper font-bold mt-0.5 leading-none">✓</span>
-            <span>Ювелірне відтворення волокон пензлем</span>
-          </li>
-          <li class="flex gap-3 items-start">
-            <span class="text-copper font-bold mt-0.5 leading-none">✓</span>
-            <span>Олії власної розробки, стійкі до хімії</span>
-          </li>
-          <li class="flex gap-3 items-start">
-            <span class="text-copper font-bold mt-0.5 leading-none">✓</span>
-            <span>Реставрація на місці без бруду та запаху</span>
-          </li>
-          <li class="flex gap-3 items-start">
-            <span class="text-copper font-bold mt-0.5 leading-none">✓</span>
-            <span>Офіційна письмова гарантія на 2 роки</span>
-          </li>
-        </ul>
-        <a href="https://www.youtube.com/watch?v=1F_47Y4wQn8" data-fancybox="video" class="magnetic mt-10 flex items-center justify-center gap-2 bg-copper text-walnut hover:bg-oil py-3.5 rounded-full text-sm font-bold transition-all duration-300">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          Дивитись відео процесу
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════ BEFORE / AFTER SHOWCASE ══════ -->
-<section class="bg-parchment text-bark relative">
-  <div class="mx-auto max-w-7xl px-5 sm:px-8 py-16 sm:py-28">
-    <div class="gsap-fade-up text-center sm:text-left">
-      <span class="font-mono text-[10px] text-copper tracking-[.25em] uppercase block mb-3">Результат</span>
-      <h2 class="font-display font-extrabold text-[clamp(1.8rem,5vw,3.4rem)] leading-[1.08] tracking-tight">Різниця, яку<br>відчуваєш на дотик.</h2>
-      <p class="mt-4 text-bark/60 max-w-lg mx-auto sm:mx-0">Ми не ховаємо дефекти — ми відтворюємо оригінальний малюнок волокон та природний тон дерева.</p>
-    </div>
-
-    <div class="mt-10 sm:mt-14 grid gap-5 md:grid-cols-2">
-      <article class="gsap-fade-up group bg-walnut rounded-2xl overflow-hidden border border-bark/10 hover:shadow-2xl hover:shadow-copper/10 transition-all duration-500 hover:-translate-y-1">
-        <div class="relative aspect-[3/2] overflow-hidden">
-          <a href="images/wood_before.jpg" data-fancybox="ba" class="cursor-hover block w-full h-full">
-            <img src="images/wood_before.jpg" alt="До реставрації" class="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-walnut/80 via-transparent to-transparent"></div>
-          </a>
-          <span class="absolute top-4 left-4 bg-walnut/80 backdrop-blur text-ivory font-mono text-[10px] tracking-widest uppercase px-3 py-1.5 rounded-full border border-ivory/10">До</span>
-        </div>
-        <div class="p-5">
-          <p class="text-ivory/50 text-sm leading-relaxed">Подряпини, сліди від гарячого, потертий лак. Стільниця втратила свій природний характер.</p>
-        </div>
+    <div class="grid md:grid-cols-3 gap-0 border-y border-ivory/10 divide-y md:divide-y-0 md:divide-x divide-ivory/10">
+      <article class="gsap-fade-up p-8 sm:p-12">
+        <span class="font-mono text-copper text-[10px] tracking-[.2em] block mb-10">01</span>
+        <h3 class="font-display font-bold text-2xl mb-4">Надсилаєте фото</h3>
+        <p class="text-[15px] text-ivory/50 leading-relaxed font-light mb-12">Зробіть загальний план стільниці та кілька фото пошкоджень. Надішліть у Telegram або Viber — ми відповімо за 15 хвилин.</p>
+        <span class="block text-[10px] font-mono tracking-widest text-ivory/30 uppercase">Безкоштовна оцінка</span>
       </article>
-      
-      <article class="gsap-fade-up group bg-walnut rounded-2xl overflow-hidden border border-bark/10 hover:shadow-2xl hover:shadow-copper/10 transition-all duration-500 hover:-translate-y-1" style="transition-delay: 0.15s">
-        <div class="relative aspect-[3/2] overflow-hidden">
-          <a href="images/wood_after.jpg" data-fancybox="ba" class="cursor-hover block w-full h-full">
-            <img src="images/wood_after.jpg" alt="Після реставрації" class="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-walnut/80 via-transparent to-transparent"></div>
-          </a>
-          <span class="absolute top-4 left-4 bg-copper text-walnut font-mono text-[10px] tracking-widest uppercase px-3 py-1.5 rounded-full font-bold shadow-lg">Після</span>
-        </div>
-        <div class="p-5">
-          <p class="text-ivory/50 text-sm leading-relaxed">Відтворений малюнок волокон, відновлений тон, захисне покриття від води та хімії.</p>
-        </div>
+
+      <article class="gsap-fade-up p-8 sm:p-12">
+        <span class="font-mono text-copper text-[10px] tracking-[.2em] block mb-10">02</span>
+        <h3 class="font-display font-bold text-2xl mb-4">Реставруємо вдома</h3>
+        <p class="text-[15px] text-ivory/50 leading-relaxed font-light mb-12">Працюємо з локальними витяжками — жодного пилу. Наші професійні олії не мають їдкого хімічного запаху.</p>
+        <span class="block text-[10px] font-mono tracking-widest text-ivory/30 uppercase">1-3 дні роботи</span>
+      </article>
+
+      <article class="gsap-fade-up p-8 sm:p-12">
+        <span class="font-mono text-copper text-[10px] tracking-[.2em] block mb-10">03</span>
+        <h3 class="font-display font-bold text-2xl mb-4">Приймаєте роботу</h3>
+        <p class="text-[15px] text-ivory/50 leading-relaxed font-light mb-12">Стільниця знову виглядає як нова і повністю захищена від води, гарячого посуду та побутової хімії.</p>
+        <span class="block text-[10px] font-mono tracking-widest text-ivory/30 uppercase">Гарантія 2 роки</span>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ══════ PROCESS — HOW IT WORKS ══════ -->
-<section id="process" class="bg-linen text-bark border-t border-bark/6">
-  <div class="mx-auto max-w-7xl px-5 sm:px-8 py-16 sm:py-28">
-    <div class="gsap-fade-up text-center">
-      <span class="font-mono text-[10px] text-copper tracking-[.25em] uppercase block mb-3">Процес</span>
-      <h2 class="font-display font-extrabold text-[clamp(1.8rem,5vw,3.2rem)] leading-[1.08] tracking-tight">Три кроки до ідеалу</h2>
+<!-- ══════ COMPARISON (FLAT GRID) ══════ -->
+<section id="compare" class="py-20 sm:py-32 border-b border-ivory/10">
+  <div class="mx-auto px-5 sm:px-10">
+    <div class="gsap-fade-up mb-16 sm:mb-24">
+      <h2 class="font-display font-bold text-[clamp(2rem,5vw,4rem)] leading-[1] tracking-[-0.03em] uppercase max-w-2xl">Підходи до ремонту</h2>
     </div>
 
-    <div class="mt-10 sm:mt-14 grid gap-5 md:grid-cols-3">
-      <article class="gsap-fade-up group bg-parchment rounded-2xl p-6 sm:p-8 border-2 border-bark/6 hover:border-copper hover:shadow-2xl hover:shadow-copper/10 hover:-translate-y-1.5 transition-all duration-400 flex flex-col">
-        <div class="mb-5 h-48 sm:h-56 -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 rounded-t-2xl overflow-hidden relative bg-walnut">
-          <img src="images/wood_before.jpg" alt="Фото пошкоджень" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700">
-          <div class="absolute inset-0 bg-gradient-to-t from-parchment via-parchment/10 to-transparent"></div>
-        </div>
-        <span class="font-mono text-copper text-xs font-bold">01</span>
-        <h3 class="font-display font-bold text-lg mt-2">Надсилаєте фото</h3>
-        <p class="mt-2 text-sm text-bark/60 leading-relaxed flex-1">Загальний план стільниці + план дефектів. У Telegram або Viber — зручно з телефону.</p>
-        <div class="mt-4 font-mono text-[10px] text-copper/80 tracking-widest uppercase font-bold">~15 хвилин на відповідь</div>
-      </article>
-
-      <article class="gsap-fade-up group bg-parchment rounded-2xl p-6 sm:p-8 border-2 border-bark/6 hover:border-copper hover:shadow-2xl hover:shadow-copper/10 hover:-translate-y-1.5 transition-all duration-400 flex flex-col" style="transition-delay: 0.1s">
-        <div class="mb-5 h-48 sm:h-56 -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 rounded-t-2xl overflow-hidden relative bg-walnut">
-          <img src="images/wood_detail.jpg" alt="Процес реставрації" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700">
-          <div class="absolute inset-0 bg-gradient-to-t from-parchment via-parchment/10 to-transparent"></div>
-        </div>
-        <span class="font-mono text-copper text-xs font-bold">02</span>
-        <h3 class="font-display font-bold text-lg mt-2">Реставруємо на місці</h3>
-        <p class="mt-2 text-sm text-bark/60 leading-relaxed flex-1"><strong class="text-bark">Працюємо з локальною витяжкою — жодного пилу.</strong> Наші олії не мають різкого хімічного запаху.</p>
-        <div class="mt-4 font-mono text-[10px] text-copper/80 tracking-widest uppercase font-bold">1–3 дні роботи</div>
-      </article>
-
-      <article class="gsap-fade-up group bg-parchment rounded-2xl p-6 sm:p-8 border-2 border-bark/6 hover:border-copper hover:shadow-2xl hover:shadow-copper/10 hover:-translate-y-1.5 transition-all duration-400 flex flex-col" style="transition-delay: 0.2s">
-        <div class="mb-5 h-48 sm:h-56 -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 rounded-t-2xl overflow-hidden relative bg-walnut">
-          <img src="images/wood_after.jpg" alt="Готова стільниця" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700">
-          <div class="absolute inset-0 bg-gradient-to-t from-parchment via-parchment/10 to-transparent"></div>
-        </div>
-        <span class="font-mono text-copper text-xs font-bold">03</span>
-        <h3 class="font-display font-bold text-lg mt-2">Користуєтесь з гарантією</h3>
-        <p class="mt-2 text-sm text-bark/60 leading-relaxed flex-1">Стільниця стійка до води, хімії та гарячого посуду. Офіційна гарантія на покриття.</p>
-        <div class="mt-4 font-mono text-[10px] text-copper/80 tracking-widest uppercase font-bold">Гарантія 2 роки</div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ══════ GALLERY CAROUSEL ══════ -->
-<section id="gallery" class="bg-parchment text-bark border-t border-bark/6 py-12 sm:py-16 overflow-hidden"
-  x-data="{ go(d){ $refs.t.scrollBy({left:d*440,behavior:'smooth'}) } }">
-  <div class="mx-auto max-w-7xl px-5 sm:px-8">
-    <div class="flex items-end justify-between mb-7">
+    <div class="grid lg:grid-cols-3 gap-10 lg:gap-16">
       <div class="gsap-fade-up">
-        <span class="font-mono text-[10px] text-copper tracking-[.25em] uppercase block mb-2">Портфоліо</span>
-        <h2 class="font-display font-extrabold text-xl sm:text-2xl tracking-tight">Наші роботи</h2>
+        <div class="border-t border-ivory/10 pt-6">
+          <h3 class="font-display font-bold text-lg mb-2">Звичайний майстер</h3>
+          <p class="font-mono text-[10px] text-ivory/30 tracking-[.15em] uppercase mb-8">Шпаклівка + Лак</p>
+          <ul class="space-y-4 text-[14px] text-ivory/50 font-light">
+            <li>— Візуально помітна «пляма» від шпаклівки</li>
+            <li>— Звичайний лак, що тріскається і боїться води</li>
+            <li>— Гарантія лише на словах</li>
+          </ul>
+        </div>
       </div>
-      <div class="flex gap-2">
-        <button @click="go(-1)" class="magnetic w-10 h-10 border border-bark/12 rounded-full flex items-center justify-center hover:bg-bark hover:text-ivory transition-colors duration-200" aria-label="Назад"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 2L4 8l6 6"/></svg></button>
-        <button @click="go(1)" class="magnetic w-10 h-10 border border-bark/12 rounded-full flex items-center justify-center hover:bg-bark hover:text-ivory transition-colors duration-200" aria-label="Далі"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 2l6 6-6 6"/></svg></button>
+
+      <div class="gsap-fade-up">
+        <div class="border-t border-ivory/10 pt-6">
+          <h3 class="font-display font-bold text-lg mb-2">Фабрика / Цех</h3>
+          <p class="font-mono text-[10px] text-ivory/30 tracking-[.15em] uppercase mb-8">Повне перешліфування</p>
+          <ul class="space-y-4 text-[14px] text-ivory/50 font-light">
+            <li>— Знімається значний шар масиву чи шпону</li>
+            <li>— Втрачається унікальна історія дерева</li>
+            <li>— Довго, потрібен демонтаж</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gsap-fade-up">
+        <div class="border-t border-copper pt-6">
+          <h3 class="font-display font-bold text-xl mb-2 text-copper">Woodart Design</h3>
+          <p class="font-mono text-[10px] text-copper/60 tracking-[.15em] uppercase mb-8">Художня реставрація</p>
+          <ul class="space-y-4 text-[14px] text-ivory/90 font-medium">
+            <li class="flex gap-3"><span class="text-copper">✓</span> Ювелірне відтворення волокон пензлем</li>
+            <li class="flex gap-3"><span class="text-copper">✓</span> Олії власної розробки, стійкі до хімії</li>
+            <li class="flex gap-3"><span class="text-copper">✓</span> Робота на місці без бруду та запаху</li>
+            <li class="flex gap-3"><span class="text-copper">✓</span> Офіційна письмова гарантія 2 роки</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-  <div x-ref="t" class="flex overflow-x-auto snap-x snap-mandatory gap-4 sm:gap-5 scroll-smooth no-bar px-5 sm:px-8 pb-4 gsap-fade-up" style="transition-delay: 0.1s">
-    <div class="flex-shrink-0 w-[82vw] sm:w-[440px] snap-start group rounded-2xl overflow-hidden aspect-[3/2] bg-walnut border border-bark/8"><a href="images/wood_before.jpg" data-fancybox="gal" class="cursor-hover block w-full h-full"><img src="images/wood_before.jpg" alt="До" class="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-600"></a></div>
-    <div class="flex-shrink-0 w-[82vw] sm:w-[440px] snap-start group rounded-2xl overflow-hidden aspect-[3/2] bg-walnut border border-bark/8"><a href="images/wood_after.jpg" data-fancybox="gal" class="cursor-hover block w-full h-full"><img src="images/wood_after.jpg" alt="Після" class="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-600"></a></div>
-    <div class="flex-shrink-0 w-[82vw] sm:w-[440px] snap-start group rounded-2xl overflow-hidden aspect-[3/2] bg-walnut border border-bark/8"><a href="images/wood_detail.jpg" data-fancybox="gal" class="cursor-hover block w-full h-full"><img src="images/wood_detail.jpg" alt="Процес" class="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-600"></a></div>
-    <div class="flex-shrink-0 w-[82vw] sm:w-[440px] snap-start group rounded-2xl overflow-hidden aspect-[3/2] bg-walnut border border-bark/8"><a href="images/wood_hero_bg.jpg" data-fancybox="gal" class="cursor-hover block w-full h-full"><img src="images/wood_hero_bg.jpg" alt="Результат" class="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-600"></a></div>
+</section>
+
+<!-- ══════ GALLERY ══════ -->
+<section id="gallery" class="py-20 sm:py-32 border-b border-ivory/10 bg-[#060606] overflow-hidden" x-data="{ go(d){ $refs.t.scrollBy({left:d*400,behavior:'smooth'}) } }">
+  <div class="mx-auto px-5 sm:px-10">
+    <div class="gsap-fade-up flex items-end justify-between mb-12 sm:mb-16">
+      <h2 class="font-display font-bold text-[clamp(2rem,5vw,4rem)] leading-[1] tracking-[-0.03em] uppercase">Портфоліо</h2>
+      <div class="flex gap-4">
+        <button @click="go(-1)" class="text-ivory/40 hover:text-ivory transition-colors uppercase text-[10px] font-mono tracking-[.2em]">Prev</button>
+        <span class="text-ivory/20">/</span>
+        <button @click="go(1)" class="text-ivory/40 hover:text-ivory transition-colors uppercase text-[10px] font-mono tracking-[.2em]">Next</button>
+      </div>
+    </div>
+  </div>
+  <div x-ref="t" class="flex overflow-x-auto snap-x snap-mandatory gap-5 sm:gap-8 scroll-smooth no-bar px-5 sm:px-10 pb-8 gsap-fade-up">
+    <div class="flex-shrink-0 w-[85vw] sm:w-[400px] snap-start bg-[#111] aspect-[3/4]">
+      <a href="images/wood_before.jpg" data-fancybox="gal" class="block w-full h-full">
+        <img src="images/wood_before.jpg" alt="До" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity duration-500 grayscale hover:grayscale-0">
+      </a>
+    </div>
+    <div class="flex-shrink-0 w-[85vw] sm:w-[400px] snap-start bg-[#111] aspect-[3/4]">
+      <a href="images/wood_after.jpg" data-fancybox="gal" class="block w-full h-full">
+        <img src="images/wood_after.jpg" alt="Після" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity duration-500 grayscale hover:grayscale-0">
+      </a>
+    </div>
+    <div class="flex-shrink-0 w-[85vw] sm:w-[400px] snap-start bg-[#111] aspect-[3/4]">
+      <a href="images/wood_detail.jpg" data-fancybox="gal" class="block w-full h-full">
+        <img src="images/wood_detail.jpg" alt="Деталь" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity duration-500 grayscale hover:grayscale-0">
+      </a>
+    </div>
+    <div class="flex-shrink-0 w-[85vw] sm:w-[400px] snap-start bg-[#111] aspect-[3/4]">
+      <a href="images/wood_hero_bg.jpg" data-fancybox="gal" class="block w-full h-full">
+        <img src="images/wood_hero_bg.jpg" alt="Фон" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity duration-500 grayscale hover:grayscale-0">
+      </a>
+    </div>
   </div>
 </section>
 
 <!-- ══════ CTA CONTACT ══════ -->
-<section id="contact" class="bg-copper text-walnut relative overflow-hidden">
-  <div aria-hidden="true" class="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full bg-oil/30 blur-[100px] pointer-events-none"></div>
-  <div class="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 py-16 sm:py-24 md:flex md:items-center md:justify-between md:gap-12">
-    <div class="max-w-xl gsap-fade-up">
-      <h2 class="font-display font-extrabold text-[clamp(1.6rem,4.5vw,2.6rem)] leading-tight tracking-tight">Отримайте точний<br>кошторис безкоштовно</h2>
-      <p class="mt-3 text-walnut/80 font-medium leading-relaxed">Сфотографуйте стільницю та надішліть у зручний месенджер. Технолог оцінить масштаб робіт протягом 15 хвилин.</p>
-      <p class="mt-6 font-mono text-[10px] text-walnut/50 tracking-widest uppercase border-t border-walnut/10 pt-4 max-w-md">
-        ✳ Ми не будемо спамити вас дзвінками. Ви просто отримаєте ціну текстом.
+<section id="contact" class="py-24 sm:py-32">
+  <div class="mx-auto px-5 sm:px-10 lg:grid lg:grid-cols-2 lg:gap-24 items-center">
+    <div class="gsap-fade-up">
+      <h2 class="font-display font-bold text-[clamp(2rem,5vw,3.5rem)] leading-[1] tracking-[-0.03em] uppercase">Отримати<br>точний кошторис</h2>
+      <p class="mt-6 text-ivory/50 font-light leading-relaxed max-w-md">Сфотографуйте стільницю та надішліть у месенджер. Технолог оцінить масштаб робіт протягом 15 хвилин.</p>
+      <p class="mt-8 font-mono text-[10px] text-ivory/30 tracking-[.15em] uppercase border-t border-ivory/10 pt-4 max-w-sm">
+        Ми не будемо спамити вас дзвінками. Ви отримаєте ціну текстом.
       </p>
     </div>
-    <div class="mt-8 md:mt-0 flex flex-col sm:flex-row gap-3 shrink-0 gsap-fade-up" style="transition-delay: 0.1s">
-      <a href="https://t.me/woodart_design_bot" target="_blank" rel="noopener" class="magnetic bg-walnut text-ivory font-bold text-center px-8 py-4.5 rounded-full hover:bg-bark hover:shadow-xl transition-all duration-300 text-sm sm:text-base">Telegram</a>
-      <a href="viber://pa?chatURI=woodart_design" class="magnetic border-2 border-walnut text-center font-bold px-8 py-4.5 rounded-full hover:bg-walnut hover:text-ivory transition-all duration-300 text-sm sm:text-base">Viber</a>
+    <div class="mt-12 lg:mt-0 flex flex-col sm:flex-row gap-4 gsap-fade-up">
+      <a href="https://t.me/woodart_design_bot" target="_blank" rel="noopener" class="bg-ivory text-black font-bold text-center px-10 py-5 uppercase text-xs tracking-[.15em] hover:bg-copper hover:text-white transition-colors duration-300">Telegram</a>
+      <a href="viber://pa?chatURI=woodart_design" class="border border-ivory/20 text-ivory font-bold text-center px-10 py-5 uppercase text-xs tracking-[.15em] hover:border-ivory transition-colors duration-300">Viber</a>
     </div>
   </div>
 </section>
 
 <!-- ══════ FAQ ══════ -->
-<section id="faq" class="bg-walnut">
-  <div class="mx-auto max-w-3xl px-5 sm:px-8 py-16 sm:py-24">
-    <div class="gsap-fade-up text-center">
-      <span class="font-mono text-[10px] text-copper tracking-[.25em] uppercase block mb-3">FAQ</span>
-      <h2 class="font-display font-extrabold text-[clamp(1.6rem,4.5vw,2.8rem)] leading-tight tracking-tight">Є сумніви? Відповідаємо відверто</h2>
+<section id="faq" class="py-20 sm:py-32 border-t border-ivory/10 bg-[#060606]">
+  <div class="mx-auto max-w-4xl px-5 sm:px-10">
+    <div class="gsap-fade-up mb-16">
+      <p class="font-mono text-[10px] text-ivory/40 tracking-[.2em] uppercase mb-4">FAQ</p>
+      <h2 class="font-display font-bold text-[clamp(2rem,4vw,3rem)] leading-[1] tracking-[-0.03em] uppercase">Запитання</h2>
     </div>
 
-    <div class="mt-12 divide-y divide-ivory/8 border-y border-ivory/8 gsap-fade-up" style="transition-delay: 0.1s">
-      <details class="group"><summary class="flex items-center justify-between gap-4 py-6 text-[15px] sm:text-base font-medium hover:text-copper transition-colors">Які дефекти стільниці можна відреставрувати?<span class="chev text-copper text-xl leading-none shrink-0">+</span></summary><p class="pb-6 text-ivory/50 text-sm sm:text-[15px] leading-relaxed">Подряпини, сколи, тріщини, плями від гарячого посуду, кави, вина, побутової хімії. Також повністю відновлюємо стерте лакове або масляне покриття по всій площі.</p></details>
-      <details class="group"><summary class="flex items-center justify-between gap-4 py-6 text-[15px] sm:text-base font-medium hover:text-copper transition-colors">Чи дійсно не буде пилу в квартирі?<span class="chev text-copper text-xl leading-none shrink-0">+</span></summary><p class="pb-6 text-ivory/50 text-sm sm:text-[15px] leading-relaxed">Абсолютно. Ми використовуємо професійний інструмент Festool з інтегрованою системою пиловидалення. Уся стружка та пил миттєво втягуються в пилосос. Ваша кухня залишиться ідеально чистою.</p></details>
-      <details class="group"><summary class="flex items-center justify-between gap-4 py-6 text-[15px] sm:text-base font-medium hover:text-copper transition-colors">Чи буде стільниця стійкою після реставрації?<span class="chev text-copper text-xl leading-none shrink-0">+</span></summary><p class="pb-6 text-ivory/50 text-sm sm:text-[15px] leading-relaxed">Так. Наші олії глибоко просочують деревину, а не створюють крихку плівку як дешевий лак. Вони полімеризуються всередині волокон і протистоять воді, гарячому посуду та хімії.</p></details>
-      <details class="group"><summary class="flex items-center justify-between gap-4 py-6 text-[15px] sm:text-base font-medium hover:text-copper transition-colors">Яка гарантія на роботу?<span class="chev text-copper text-xl leading-none shrink-0">+</span></summary><p class="pb-6 text-ivory/50 text-sm sm:text-[15px] leading-relaxed">Ми надаємо 2 роки офіційної письмової гарантії на відшарування покриття, втрату кольору та появу білих плям від води.</p></details>
-      <details class="group"><summary class="flex items-center justify-between gap-4 py-6 text-[15px] sm:text-base font-medium hover:text-copper transition-colors">Як зробити правильне фото для оцінки?<span class="chev text-copper text-xl leading-none shrink-0">+</span></summary><p class="pb-6 text-ivory/50 text-sm sm:text-[15px] leading-relaxed">Зробіть 1 загальне фото стільниці та 1-2 фото пошкоджень великим планом (бажано під кутом до світла, щоб було видно глибину подряпин). Цього достатньо для точного кошторису.</p></details>
+    <div class="divide-y divide-ivory/10 border-t border-ivory/10 gsap-fade-up">
+      <details class="group"><summary class="flex items-center justify-between gap-4 py-8 text-[15px] sm:text-lg font-light hover:text-copper transition-colors">Які дефекти можна виправити?<span class="chev text-copper text-xl leading-none shrink-0">+</span></summary><p class="pb-8 text-ivory/50 text-[14px] sm:text-[15px] leading-relaxed font-light">Подряпини, сколи, тріщини, плями від гарячого посуду, кави, вина, побутової хімії. Також повністю відновлюємо стерте покриття по всій площі.</p></details>
+      <details class="group"><summary class="flex items-center justify-between gap-4 py-8 text-[15px] sm:text-lg font-light hover:text-copper transition-colors">Чи дійсно не буде пилу?<span class="chev text-copper text-xl leading-none shrink-0">+</span></summary><p class="pb-8 text-ivory/50 text-[14px] sm:text-[15px] leading-relaxed font-light">Абсолютно. Ми використовуємо професійний інструмент з інтегрованою системою пиловидалення. Ваша кухня залишиться ідеально чистою.</p></details>
+      <details class="group"><summary class="flex items-center justify-between gap-4 py-8 text-[15px] sm:text-lg font-light hover:text-copper transition-colors">Яка гарантія?<span class="chev text-copper text-xl leading-none shrink-0">+</span></summary><p class="pb-8 text-ivory/50 text-[14px] sm:text-[15px] leading-relaxed font-light">Надаємо 2 роки офіційної гарантії на відшарування покриття, втрату кольору та появу білих плям від води.</p></details>
     </div>
   </div>
 </section>
 
 <!-- ══════ FOOTER ══════ -->
-<footer class="bg-walnut border-t border-ivory/8">
-  <div class="mx-auto max-w-7xl px-5 sm:px-8 py-12 grid gap-8 sm:grid-cols-3 text-sm">
-    <div>
-      <span class="font-display font-extrabold text-base">Woodart<span class="text-copper">.</span></span>
-      <p class="mt-3 text-ivory/35 max-w-xs leading-relaxed">Реставрація дерев'яних стільниць у Києві. Якість, яку відчуваєш на дотик.</p>
+<footer class="border-t border-ivory/10 pt-20 pb-10">
+  <div class="mx-auto px-5 sm:px-10 grid gap-12 sm:grid-cols-2 md:grid-cols-4 mb-20 text-[13px] font-light text-ivory/50">
+    <div class="md:col-span-2">
+      <span class="font-display font-extrabold text-xl text-ivory uppercase tracking-tight">WOODART</span>
+      <p class="mt-4 max-w-xs leading-relaxed">Художня реставрація дерев'яних стільниць у Києві.</p>
     </div>
     <div>
-      <p class="font-mono text-[10px] tracking-widest uppercase text-ivory/25 mb-3">Месенджери</p>
-      <ul class="space-y-1.5 text-ivory/50">
-        <li><a href="https://t.me/woodart_design_bot" target="_blank" rel="noopener" class="hover:text-copper transition-colors">Telegram</a></li>
-        <li><a href="viber://pa?chatURI=woodart_design" class="hover:text-copper transition-colors">Viber</a></li>
+      <p class="font-mono text-[10px] tracking-[.2em] uppercase text-ivory/30 mb-6">Месенджери</p>
+      <ul class="space-y-3">
+        <li><a href="https://t.me/woodart_design_bot" target="_blank" rel="noopener" class="hover:text-ivory transition-colors">Telegram</a></li>
+        <li><a href="viber://pa?chatURI=woodart_design" class="hover:text-ivory transition-colors">Viber</a></li>
       </ul>
     </div>
     <div>
-      <p class="font-mono text-[10px] tracking-widest uppercase text-ivory/25 mb-3">Контакти</p>
-      <p class="text-ivory/50 leading-relaxed"><a href="tel:+380971234567" class="magnetic hover:text-copper transition-colors inline-block">+380 (97) 123 45 67</a><br>Київ та передмістя<br>Щодня 9:00 — 20:00</p>
+      <p class="font-mono text-[10px] tracking-[.2em] uppercase text-ivory/30 mb-6">Контакти</p>
+      <ul class="space-y-3">
+        <li><a href="tel:+380971234567" class="hover:text-ivory transition-colors">+380 (97) 123 45 67</a></li>
+        <li>Київ та передмістя</li>
+      </ul>
     </div>
   </div>
-  <div class="border-t border-ivory/6 py-5 text-center font-mono text-[10px] text-ivory/20 tracking-wider">© 2026 Woodart Design</div>
+  <div class="mx-auto px-5 sm:px-10 border-t border-ivory/10 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 font-mono text-[10px] tracking-[.2em] uppercase text-ivory/20">
+    <span>© 2026 Woodart</span>
+    <span>Premium Quality</span>
+  </div>
 </footer>
 
 <script>
 // Mobile Menu Toggle
 const burger=document.getElementById('burger'),ov=document.getElementById('ov'),icO=document.getElementById('icO'),icX=document.getElementById('icX');
 let open=false;
-function tog(s){open=s;ov.classList.toggle('shut',!open);icO.classList.toggle('hidden',open);icX.classList.toggle('hidden',!open);document.body.classList.toggle('locked',open);burger.setAttribute('aria-expanded',String(open))}
+function tog(s){open=s;ov.classList.toggle('shut',!open);icO.classList.toggle('hidden',open);icX.classList.toggle('hidden',!open);document.body.classList.toggle('locked',open);}
 burger.addEventListener('click',()=>tog(!open));
 ov.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>tog(false)));
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&open)tog(false)});
 
-// Fancybox init
+// Fancybox
 Fancybox.bind('[data-fancybox]',{Hash:false});
 
-// ==========================================
-// PREMIUM EXPERIENCES (Lenis, GSAP, Cursor)
-// ==========================================
-
-// 1. Lenis Smooth Scroll Setup
+// Lenis
 const lenis = new Lenis({
   duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Expo ease-out
-  direction: 'vertical',
-  gestureDirection: 'vertical',
-  smooth: true,
-  mouseMultiplier: 1,
-  smoothTouch: false,
-  touchMultiplier: 2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smooth: true
 });
-
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
+function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
 requestAnimationFrame(raf);
 
-// Integrate Lenis with GSAP ScrollTrigger
+// GSAP
 gsap.registerPlugin(ScrollTrigger);
 lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add((time) => { lenis.raf(time * 1000) });
 gsap.ticker.lagSmoothing(0);
 
-// 2. Custom Cursor Logic (Desktop only)
-const cursor = document.querySelector('.cursor-dot');
-if (cursor && matchMedia('(pointer: fine)').matches) {
-  let mouseX = 0, mouseY = 0;
-  let cursorX = 0, cursorY = 0;
-  
-  // Follow mouse with slight lerp for smoothness
-  window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
-  
-  gsap.ticker.add(() => {
-    cursorX += (mouseX - cursorX) * 0.2; // Lerp factor
-    cursorY += (mouseY - cursorY) * 0.2;
-    cursor.style.transform = `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`;
-  });
-
-  // Hover states for gallery images
-  const hoverTargets = document.querySelectorAll('.cursor-hover');
-  hoverTargets.forEach(target => {
-    target.addEventListener('mouseenter', () => cursor.classList.add('active'));
-    target.addEventListener('mouseleave', () => cursor.classList.remove('active'));
-  });
-}
-
-// 3. Magnetic Buttons
-const magneticButtons = document.querySelectorAll('.magnetic');
-if (matchMedia('(pointer: fine)').matches) {
-  magneticButtons.forEach(btn => {
-    btn.addEventListener('mousemove', (e) => {
-      const rect = btn.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      
-      gsap.to(btn, {
-        x: x * 0.3,
-        y: y * 0.3,
-        duration: 0.4,
-        ease: "power2.out"
-      });
-    });
-    
-    btn.addEventListener('mouseleave', () => {
-      gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
-    });
-  });
-}
-
-// 4. GSAP Animations
-
-// Hero entry animations
-const tl = gsap.timeline();
-tl.to(".hero-fade", { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "power3.out", delay: 0.1 })
-  .to(".line-mask-inner", { y: "0%", duration: 1.2, stagger: 0.15, ease: "power4.out" }, "-=0.8");
-
-// Scroll Reveal Animations
 const revealElements = document.querySelectorAll('.gsap-fade-up');
 revealElements.forEach(el => {
   ScrollTrigger.create({
     trigger: el,
-    start: "top 85%", // when top of element hits 85% of viewport
-    onEnter: () => {
-      gsap.to(el, { opacity: 1, y: 0, duration: 1, ease: "power3.out", overwrite: "auto" });
-    },
+    start: "top 85%",
+    onEnter: () => gsap.to(el, { opacity: 1, y: 0, duration: 1, ease: "power3.out", overwrite: "auto" }),
     once: true
   });
 });
