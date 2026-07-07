@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Реставрація стільниць Київ — Woodart Design</title>
+<meta name="description" content="Професійне відновлення та реставрація стільниць у Києві та передмісті. Вища художня освіта майстрів, стійкі захисні засоби власної розробки, гарантія 2 роки.">
+
+<!-- Tailwind CSS v4 CDN -->
+<script src="https://cdn.tailwindcss.com/@tailwindcss/browser@4"></script>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Golos+Text:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style type="text/tailwindcss">
+@theme {
+  --color-wood-dark:  #171311; /* Deep rich wenge / walnut */
+  --color-charcoal:   #25201D; /* Warm charcoal dark wood tone */
+  --color-sand:       #E5DCD0; /* Oak / sawdust beige */
+  --color-birch:      #F5EFE5; /* Light clean birch wood tone */
+  --color-amber:      #D97026; /* Varnish amber / orange heat */
+  --color-cream:      #FFFBF5; /* Soft warm cream */
+  --font-display: "Unbounded", sans-serif;
+  --font-body: "Golos Text", sans-serif;
+  --font-stamp: "IBM Plex Mono", monospace;
+}
+</style>
+
+<style>
+  /* Marquee scroll animation */
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .marquee-track { display: flex; width: max-content; animation: marquee 28s linear infinite; }
+  
+  /* Details/Summary FAQ Chevron */
+  details[open] .chev { transform: rotate(45deg); }
+  .chev { transition: transform .2s ease; }
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  
+  /* Focus visibility */
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 3px solid #D97026; outline-offset: 3px; border-radius: 4px;
+  }
+  
+  /* Staggered hero entrance animations */
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  .rise { animation: rise .7s cubic-bezier(.2,.7,.2,1) both; }
+  .rise-1 { animation-delay: .05s; } .rise-2 { animation-delay: .15s; }
+  .rise-3 { animation-delay: .28s; } .rise-4 { animation-delay: .4s; }
+  
+  /* Pulsing status dot */
+  @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+  .live-dot { animation: pulse-dot 1.6s ease-in-out infinite; }
+  
+  /* Full screen mobile menu lock */
+  body.no-scroll { overflow: hidden; }
+  
+  /* Hide horizontal scrollbar for carousel */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+    .rise, .live-dot { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+
+<!-- Fancybox 5 CSS & JS CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+</head>
+<body class="bg-wood-dark text-cream font-body antialiased">
+
+<!-- ============ NAVIGATION ============ -->
+<header class="sticky top-0 z-[70] bg-wood-dark/90 backdrop-blur border-b border-cream/10">
+  <nav class="mx-auto max-w-6xl px-4 sm:px-6 flex items-center justify-between h-16">
+    <!-- Logo -->
+    <a href="#top" class="font-display font-black text-lg tracking-tight uppercase">
+      woodart <span class="text-amber">design.</span>
+    </a>
+    
+    <!-- Desktop menu -->
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+      <a href="#advantages" class="hover:text-amber transition-colors">Переваги</a>
+      <a href="#gallery" class="hover:text-amber transition-colors">Галерея робіт</a>
+      <a href="#estimate" class="hover:text-amber transition-colors">Оцінка вартості</a>
+      <a href="#faq" class="hover:text-amber transition-colors">FAQ</a>
+      <a href="#estimate" class="bg-amber text-wood-dark font-semibold px-5 py-2.5 rounded-full hover:bg-cream transition-colors">Оцінити по фото</a>
+    </div>
+
+    <!-- Burger / Close Button -->
+    <button id="menuBtn" aria-label="Відкрити меню" aria-expanded="false" class="md:hidden p-2 relative z-[80] text-cream">
+      <svg id="iconBurger" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg id="iconClose" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </nav>
+</header>
+
+<!-- Mobile full-screen navigation overlay -->
+<div id="mobileMenu" class="hidden md:hidden fixed inset-0 z-[60] bg-wood-dark flex flex-col opacity-0 pointer-events-none transition-all duration-300">
+  <div class="h-16 shrink-0"></div>
+  <nav class="flex-1 flex flex-col justify-center px-6 gap-2">
+    <a href="#advantages" class="m-link group flex items-baseline gap-4 py-3 border-b border-cream/10">
+      <span class="font-stamp text-xs text-amber">01</span>
+      <span class="font-display font-bold uppercase text-2xl group-active:text-amber">Переваги</span>
+    </a>
+    <a href="#gallery" class="m-link group flex items-baseline gap-4 py-3 border-b border-cream/10">
+      <span class="font-stamp text-xs text-amber">02</span>
+      <span class="font-display font-bold uppercase text-2xl group-active:text-amber">Галерея робіт</span>
+    </a>
+    <a href="#estimate" class="m-link group flex items-baseline gap-4 py-3 border-b border-cream/10">
+      <span class="font-stamp text-xs text-amber">03</span>
+      <span class="font-display font-bold uppercase text-2xl group-active:text-amber">Оцінка вартості</span>
+    </a>
+    <a href="#faq" class="m-link group flex items-baseline gap-4 py-3 border-b border-cream/10">
+      <span class="font-stamp text-xs text-amber">04</span>
+      <span class="font-display font-bold uppercase text-2xl group-active:text-amber">FAQ</span>
+    </a>
+    <a href="#estimate" class="m-link mt-6 bg-amber text-wood-dark font-semibold text-center px-6 py-4 rounded-full text-lg">Безкоштовна оцінка</a>
+  </nav>
+  <div class="shrink-0 px-6 pb-8 flex items-center justify-between font-stamp text-xs text-cream/40 tracking-widest uppercase">
+    <span>+380 (97) 123 45 67</span>
+    <span>Київ та передмістя ✳</span>
+  </div>
+</div>
+
+<!-- ============ HERO SECTION ============ -->
+<section id="top" class="relative overflow-hidden">
+  <!-- Image Background -->
+  <div class="absolute inset-0 z-0">
+    <img src="images/wood_hero_bg.jpg" alt="Реставрована дерев'яна стільниця" class="w-full h-full object-cover opacity-15 mix-blend-screen scale-105 animate-[pulse-dot_15s_ease-in-out_infinite]">
+    <div class="absolute inset-0 bg-gradient-to-b from-wood-dark/50 via-wood-dark/90 to-wood-dark"></div>
+  </div>
+  <!-- Ambient oil amber glow -->
+  <div aria-hidden="true" class="absolute -top-32 -right-32 w-[28rem] h-[28rem] sm:w-[40rem] sm:h-[40rem] rounded-full bg-amber opacity-[0.2] blur-3xl pointer-events-none z-0"></div>
+  
+  <div class="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 pt-12 sm:pt-20 pb-10 sm:pb-24">
+    <!-- Live status badge -->
+    <p class="rise rise-1 inline-flex items-center gap-2.5 border border-cream/20 rounded-full px-4 py-2 font-stamp text-[11px] sm:text-xs tracking-[0.18em] uppercase text-cream/80 bg-wood-dark/50 backdrop-blur-sm">
+      <span class="live-dot w-2 h-2 rounded-full bg-amber shrink-0"></span>
+      Оцінюємо пошкодження по фото онлайн
+    </p>
+    
+    <!-- Title -->
+    <h1 class="rise rise-2 mt-7 sm:mt-9 font-display font-black leading-[1.02] text-[clamp(2.2rem,7.5vw,5.5rem)] uppercase">
+      Реставрація<br><span class="inline-block bg-amber text-wood-dark px-3 sm:px-4 -skew-x-3">стільниць.</span><br>У Києві.
+    </h1>
+    
+    <!-- Description -->
+    <p class="rise rise-3 mt-6 sm:mt-8 max-w-xl text-cream/80 text-base sm:text-lg leading-relaxed">
+      Магазинні лаки стираються, а стільниці втрачають свій лиск. Ми повертаємо дерево до життя. Покриття стійке до побутової хімії, гарячого посуду та води.
+    </p>
+    
+    <!-- Buttons -->
+    <div class="rise rise-3 mt-8 sm:mt-10 flex flex-col sm:flex-row gap-4">
+      <a href="#estimate" class="bg-amber text-wood-dark font-semibold text-center px-8 py-4 rounded-full text-lg hover:bg-cream hover:scale-103 hover:shadow-lg hover:shadow-amber/15 transition-all duration-300">Оцінити вартість</a>
+      <a href="#gallery" class="border border-cream/30 text-center px-8 py-4 rounded-full text-lg hover:border-amber hover:text-amber hover:bg-amber/10 hover:scale-103 transition-all duration-300 backdrop-blur-sm">Дивитись роботи</a>
+    </div>
+
+    <!-- Features Row -->
+    <dl class="rise rise-4 mt-12 sm:mt-16 grid grid-cols-3 gap-4 sm:gap-8 border-t border-cream/15 pt-6 max-w-2xl">
+      <div>
+        <dt class="font-stamp text-[10px] sm:text-xs tracking-widest uppercase text-cream/45">Гарантія</dt>
+        <dd class="mt-1 font-stamp text-lg sm:text-2xl text-amber">2 роки</dd>
+      </div>
+      <div>
+        <dt class="font-stamp text-[10px] sm:text-xs tracking-widest uppercase text-cream/45">Онлайн-оцінка</dt>
+        <dd class="mt-1 font-stamp text-lg sm:text-2xl">~15 хв</dd>
+      </div>
+      <div>
+        <dt class="font-stamp text-[10px] sm:text-xs tracking-widest uppercase text-cream/45">Кваліфікація</dt>
+        <dd class="mt-1 font-stamp text-lg sm:text-xl md:text-2xl">Художня освіта</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ RUNNING TICKER (MARQUEE) ============ -->
+<div class="bg-amber text-wood-dark overflow-hidden py-3 border-y-2 border-wood-dark" aria-hidden="true">
+  <div class="marquee-track font-stamp text-xs sm:text-sm font-semibold tracking-wider">
+    <span class="flex gap-8 pr-8 whitespace-nowrap">
+      <span>МАЙСТРИ З ВИЩОЮ ХУДОЖНЬОЮ ОСВІТОЮ</span><span>✳</span>
+      <span>ВЛАСНІ ЗАХИСНІ ЗАСОБИ ПРОТИ ПОБУТОВОЇ ХІМІЇ</span><span>✳</span>
+      <span>2 РОКИ ПИСЬМОВОЇ ГАРАНТІЇ</span><span>✳</span>
+      <span>ОЦІНКА ВАРТОСТІ ЗА ФОТО ЗА 15 ХВИЛИН</span><span>✳</span>
+    </span>
+    <span class="flex gap-8 pr-8 whitespace-nowrap">
+      <span>МАЙСТРИ З ВИЩОЮ ХУДОЖНЬОЮ ОСВІТОЮ</span><span>✳</span>
+      <span>ВЛАСНІ ЗАХИСНІ ЗАСОБИ ПРОТИ ПОБУТОВОЇ ХІМІЇ</span><span>✳</span>
+      <span>2 РОКИ ПИСЬМОВОЇ ГАРАНТІЇ</span><span>✳</span>
+      <span>ОЦІНКА ВАРТОСТІ ЗА ФОТО ЗА 15 ХВИЛИН</span><span>✳</span>
+    </span>
+  </div>
+</div>
+
+<!-- ============ ADVANTAGES STORY SECTION ============ -->
+<section id="advantages" class="bg-birch text-charcoal">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-16 sm:py-24 grid gap-12 md:grid-cols-12 md:items-center">
+    
+    <!-- Left Column: Story Prose -->
+    <div class="md:col-span-7">
+      <span class="font-stamp text-xs text-amber uppercase tracking-widest block mb-3">Студія Woodart</span>
+      <h2 class="font-display font-bold uppercase text-[clamp(1.8rem,5vw,3.2rem)] leading-tight">Кожна деталь має значення</h2>
+      
+      <div class="mt-6 space-y-6 text-charcoal/80 text-base sm:text-lg leading-relaxed">
+        <p>
+          Ми відмовилися від конвеєрних підходів. <strong class="text-charcoal font-semibold">Кожен реставратор нашої команди має вищу художню освіту</strong>, тому відновлення стільниці для нас — це творчий художній процес, де детально підбирається кожна лінія волокна та відтінок дерева.
+        </p>
+        <p>
+          У роботі ми застосовуємо <strong class="text-charcoal font-semibold underline decoration-amber decoration-2 underline-offset-4">захисні засоби власної розробки</strong>. Це гарантує, що відреставрована поверхня отримає надійний щит проти побутової хімії, води, плям від кави чи гарячого посуду.
+        </p>
+        <p>
+          Надійна технологія дозволяє нам давати <strong class="text-amber font-bold text-xl sm:text-2xl">аж 2 роки гарантії</strong> на покриття. Ми повертаємо вашому столу первинну природну красу та продовжуємо його службу.
+        </p>
+      </div>
+    </div>
+    
+    <!-- Right Column: 만족스러운 Process Video Card -->
+    <div class="md:col-span-5">
+      <div class="group bg-cream rounded-3xl p-4 border-2 border-charcoal/10 hover:border-amber transition-all duration-300 hover:shadow-2xl hover:shadow-amber/10 relative overflow-hidden flex flex-col">
+        <div class="mb-4 overflow-hidden rounded-2xl relative aspect-[4/3] bg-wood-dark">
+          <img src="images/wood_detail.jpg" alt="Процес покриття дерева маслом" class="w-full h-full object-cover opacity-90 group-hover:scale-103 transition-transform duration-700">
+          
+          <!-- Play Video overlay linking to satisfying woodworking process -->
+          <a href="https://www.youtube.com/watch?v=1F_47Y4wQn8" data-fancybox="video" class="absolute inset-0 bg-wood-dark/20 flex flex-col items-center justify-center transition-all duration-300 group-hover:bg-wood-dark/40 focus:outline-none">
+            <div class="w-14 h-14 bg-cream text-wood-dark rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110">
+              <svg class="w-5 h-5 fill-current translate-x-0.5" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+          </a>
+        </div>
+        <div class="px-2 pb-2">
+          <div class="font-stamp text-[10px] tracking-widest text-charcoal/50 uppercase">Відео процесу</div>
+          <h3 class="font-display font-bold text-sm mt-1 uppercase">Як працюють наші майстри</h3>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ GALLERY CAROUSEL SECTION (Just Photos, No Titles/Info) ============ -->
+<section id="gallery" class="bg-birch text-charcoal py-8 border-t border-charcoal/10 overflow-hidden relative" x-data="{
+    scrollNext() { $refs.galleryCarousel.scrollBy({ left: 450, behavior: 'smooth' }) },
+    scrollPrev() { $refs.galleryCarousel.scrollBy({ left: -450, behavior: 'smooth' }) }
+}">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <!-- Slider Nav Buttons -->
+    <div class="flex justify-end gap-2 mb-6">
+      <button @click="scrollPrev()" class="p-3 border border-charcoal/20 rounded-full hover:bg-charcoal hover:text-cream transition-colors duration-300 focus:outline-none" aria-label="Попереднє фото">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <button @click="scrollNext()" class="p-3 border border-charcoal/20 rounded-full hover:bg-charcoal hover:text-cream transition-colors duration-300 focus:outline-none" aria-label="Наступне фото">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+
+    <!-- Carousel Snap Container -->
+    <div x-ref="galleryCarousel" class="flex overflow-x-auto snap-x snap-mandatory gap-6 scroll-smooth scrollbar-hide pb-4">
+      
+      <!-- Item 1: Before -->
+      <div class="flex-shrink-0 w-[85vw] sm:w-[480px] snap-start group relative overflow-hidden rounded-3xl border-2 border-charcoal/10 aspect-[3/2] bg-wood-dark shadow-sm">
+        <a href="images/wood_before.jpg" data-fancybox="gallery" class="block w-full h-full focus:outline-none">
+          <img src="images/wood_before.jpg" alt="До реставрації" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-102">
+        </a>
+      </div>
+      
+      <!-- Item 2: After -->
+      <div class="flex-shrink-0 w-[85vw] sm:w-[480px] snap-start group relative overflow-hidden rounded-3xl border-2 border-charcoal/10 aspect-[3/2] bg-wood-dark shadow-sm">
+        <a href="images/wood_after.jpg" data-fancybox="gallery" class="block w-full h-full focus:outline-none">
+          <img src="images/wood_after.jpg" alt="Після реставрації" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-102">
+        </a>
+      </div>
+
+      <!-- Item 3: Process -->
+      <div class="flex-shrink-0 w-[85vw] sm:w-[480px] snap-start group relative overflow-hidden rounded-3xl border-2 border-charcoal/10 aspect-[3/2] bg-wood-dark shadow-sm">
+        <a href="images/wood_detail.jpg" data-fancybox="gallery" class="block w-full h-full focus:outline-none">
+          <img src="images/wood_detail.jpg" alt="Деталь покриття" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-102">
+        </a>
+      </div>
+
+      <!-- Item 4: Result -->
+      <div class="flex-shrink-0 w-[85vw] sm:w-[480px] snap-start group relative overflow-hidden rounded-3xl border-2 border-charcoal/10 aspect-[3/2] bg-wood-dark shadow-sm">
+        <a href="images/wood_hero_bg.jpg" data-fancybox="gallery" class="block w-full h-full focus:outline-none">
+          <img src="images/wood_hero_bg.jpg" alt="Відновлена стільниця в інтер'єрі" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-102">
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEAD GENERATION CTA SECTION ============ -->
+<section id="estimate" class="bg-amber text-wood-dark">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-14 sm:py-20 md:flex md:items-center md:justify-between md:gap-10">
+    <div>
+      <h2 class="font-display font-bold uppercase text-[clamp(1.6rem,4.5vw,2.6rem)] leading-tight">Оцінити стільницю по фото</h2>
+      <p class="mt-3 max-w-lg text-wood-dark font-medium leading-relaxed">
+        Просто сфотографуйте пошкоджену поверхню (загальний план та дефекти зблизька) та надішліть нам. Технолог відповість з точним кошторисом протягом 15 хвилин.
+      </p>
+    </div>
+    <div class="mt-8 md:mt-0 flex flex-col sm:flex-row gap-4 shrink-0 w-full sm:w-auto">
+      <a href="https://t.me/woodart_design_bot" target="_blank" rel="noopener" class="bg-wood-dark text-cream text-center font-semibold px-8 py-4 rounded-full hover:bg-charcoal transition-colors shadow-lg hover:scale-103 transition-transform duration-300">Написати в Telegram</a>
+      <a href="viber://pa?chatURI=woodart_design" class="border-2 border-wood-dark text-center font-semibold px-8 py-4 rounded-full hover:bg-wood-dark hover:text-cream transition-colors hover:scale-103 transition-transform duration-300">Написати у Viber</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ SECTION ============ -->
+<section id="faq" class="bg-wood-dark">
+  <div class="mx-auto max-w-3xl px-4 sm:px-6 py-16 sm:py-24">
+    <span class="font-stamp text-xs text-amber uppercase tracking-widest block mb-4 text-center">Консультація</span>
+    <h2 class="font-display font-bold uppercase text-[clamp(1.8rem,5vw,3rem)] leading-tight text-center">Питання, які нам ставлять</h2>
+    
+    <div class="mt-10 divide-y divide-cream/10 border-y border-cream/10">
+      
+      <details class="group">
+        <summary class="flex items-center justify-between py-5 font-medium text-lg text-cream hover:text-amber">
+          <span>Які саме дефекти стільниці можна відреставрувати?</span>
+          <span class="chev text-amber text-2xl leading-none">+</span>
+        </summary>
+        <p class="pb-5 text-cream/70 leading-relaxed font-light">
+          Ми реставруємо будь-які види пошкоджень: глибокі подряпини, сколи, тріщини, випалені місця від гарячого посуду, плями від кави, вина чи побутової хімії. Також відновлюємо стерте захисне покриття (лак, олію) по всій площі стільниці.
+        </p>
+      </details>
+
+      <details class="group">
+        <summary class="flex items-center justify-between py-5 font-medium text-lg text-cream hover:text-amber">
+          <span>Хто виконує реставрацію? Яка кваліфікація?</span>
+          <span class="chev text-amber text-2xl leading-none">+</span>
+        </summary>
+        <p class="pb-5 text-cream/70 leading-relaxed font-light">
+          Усі майстри нашої команди мають вищу художню освіту. Це дозволяє нам філігранно підбирати тон і заново вимальовувати природні волокна дерева на пошкоджених ділянках, роблячи місце ремонту повністю непомітним.
+        </p>
+      </details>
+
+      <details class="group">
+        <summary class="flex items-center justify-between py-5 font-medium text-lg text-cream hover:text-amber">
+          <span>Чи буде стільниця стійкою після реставрації?</span>
+          <span class="chev text-amber text-2xl leading-none">+</span>
+        </summary>
+        <p class="pb-5 text-cream/70 leading-relaxed font-light">
+          Так. Ми використовуємо засоби захисту власної розробки (олії та лаки), які глибоко просочують пори дерева. Відновлена стільниця буде стійкою до тривалого впливу води, гарячого посуду та щоденного прибирання із використанням миючих засобів.
+        </p>
+      </details>
+
+      <details class="group">
+        <summary class="flex items-center justify-between py-5 font-medium text-lg text-cream hover:text-amber">
+          <span>Яку гарантію ви надаєте на роботу?</span>
+          <span class="chev text-amber text-2xl leading-none">+</span>
+        </summary>
+        <p class="pb-5 text-cream/70 leading-relaxed font-light">
+          На всі види виконаних нами робіт з реставрації стільниць ми надаємо офіційну письмову гарантію терміном 2 роки.
+        </p>
+      </details>
+
+      <details class="group">
+        <summary class="flex items-center justify-between py-5 font-medium text-lg text-cream hover:text-amber">
+          <span>Як правильно зробити фото для онлайн-оцінки?</span>
+          <span class="chev text-amber text-2xl leading-none">+</span>
+        </summary>
+        <p class="pb-5 text-cream/70 leading-relaxed font-light">
+          Бажано зробити 1-2 фотографії загального вигляду стільниці, а також декілька великих планів самих пошкоджень (подряпини, сколи) під хорошим освітленням з близької відстані. Це дозволить нашому технологу точно розрахувати кошторис за 15 хвилин.
+        </p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-wood-dark border-t border-cream/10">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-12 grid gap-8 sm:grid-cols-3">
+    <div>
+      <div class="font-display font-black text-lg">woodart <span class="text-amber">design.</span></div>
+      <p class="mt-3 text-sm text-cream/60 max-w-xs">Реставрація стільниць з масиву дерева та шпону. Справжня якість та надійний захист.</p>
+    </div>
+    <div class="text-sm">
+      <div class="font-stamp text-xs tracking-widest uppercase text-cream/40 mb-3">Месенджери</div>
+      <ul class="space-y-2 text-cream/75">
+        <li><a href="https://t.me/woodart_design_bot" target="_blank" rel="noopener" class="hover:text-amber transition-colors">Telegram Бот</a></li>
+        <li><a href="viber://pa?chatURI=woodart_design" class="hover:text-amber transition-colors">Viber Бот</a></li>
+      </ul>
+    </div>
+    <div class="text-sm">
+      <div class="font-stamp text-xs tracking-widest uppercase text-cream/40 mb-3">Контакти</div>
+      <p class="text-cream/60">
+        Телефон: <a href="tel:+380971234567" class="text-cream hover:text-amber transition-colors">+380 (97) 123 45 67</a><br>
+        Локація: Київ та передмістя<br>
+        Робота: з 9:00 до 20:00 без вихідних
+      </p>
+    </div>
+  </div>
+  <div class="border-t border-cream/10 py-5 text-center font-stamp text-xs text-cream/40">
+    © 2026 Woodart Design · Реставрація стільниць у Києві та передмісті.
+  </div>
+</footer>
+
+<!-- Floating sticky contact shortcuts (Mobile-friendly) -->
+<div class="fixed bottom-6 right-6 z-50 flex flex-col space-y-3">
+  <!-- Telegram -->
+  <a href="https://t.me/woodart_design_bot" target="_blank" rel="noopener" id="sticky-telegram"
+     class="flex items-center justify-center w-12 h-12 bg-wood-dark text-cream hover:bg-[#229ED9] hover:text-white rounded-full shadow-2xl transition-all duration-300 group relative focus:outline-none">
+      <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.89 1.19-5.33 3.52-.5.35-.96.52-1.37.51-.45-.01-1.31-.25-1.96-.46-.79-.26-1.42-.4-1.36-.84.03-.23.35-.47.95-.71 3.72-1.62 6.2-2.7 7.44-3.23 3.54-1.51 4.27-1.77 4.75-1.78.1.01.34.03.49.16.12.1.16.24.18.34.02.1.03.3.01.47z"/>
+      </svg>
+      <span class="absolute right-14 bg-wood-dark text-cream text-[10px] font-sans tracking-widest uppercase font-semibold py-1.5 px-3 rounded shadow-md opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">Telegram</span>
+  </a>
+  <!-- Viber -->
+  <a href="viber://pa?chatURI=woodart_design" id="sticky-viber"
+     class="flex items-center justify-center w-12 h-12 bg-wood-dark text-cream hover:bg-[#7360F2] hover:text-white rounded-full shadow-2xl transition-all duration-300 group relative focus:outline-none">
+      <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+          <path d="M19.78 14.86c-.74-1.22-2.02-1.8-3.32-1.83-.88-.02-1.6.21-2.1.7-.13-.08-.26-.17-.4-.27-1.15-.84-2.12-1.88-2.88-3.09.28-.31.54-.66.75-1.06.63-.98.66-2.26.1-3.24l-.84-1.48c-.6-.94-1.72-1.48-2.84-1.35C7 3.5 5.86 4.4 5.3 5.7c-.52 1.25-.38 2.65.4 3.73 1.9 3.03 4.54 5.6 7.6 7.42 1 .6 2.25.68 3.32.22 1.15-.5 1.86-1.58 1.92-2.83l-.03-.78c-.02-.85-.35-1.65-1.03-2.15l-.73-.45zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm6.2 12.3c-.04.83-.51 1.55-1.28 1.88-.7.3-1.54.25-2.2-.15-2.6-1.55-4.85-3.73-6.47-6.3-.53-.74-.63-1.68-.27-2.52.36-.88 1.18-1.47 2.12-1.56.76-.08 1.5.28 1.9.92l.84 1.48c.38.67.36 1.5-.06 2.16-.17.27-.37.52-.6.74-.08.08-.12.2-.09.31.06.2.2.4.35.58 1.05 1.24 2.34 2.28 3.76 3.1.18.1.37.2.55.22.1.01.2-.03.26-.1.25-.26.5-.5.73-.78.43-.53 1.15-.65 1.74-.32l.73.45c.46.34.68.88.7 1.45l-.01.53z"/>
+      </svg>
+      <span class="absolute right-14 bg-wood-dark text-cream text-[10px] font-sans tracking-widest uppercase font-semibold py-1.5 px-3 rounded shadow-md opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">Viber</span>
+  </a>
+</div>
+
+<!-- ============ SCRIPTS ============ -->
+<script>
+// Mobile Navigation Toggle
+const btn = document.getElementById('menuBtn');
+const menu = document.getElementById('mobileMenu');
+const iconBurger = document.getElementById('iconBurger');
+const iconClose = document.getElementById('iconClose');
+
+function setMenu(open) {
+  if (open) {
+    menu.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
+    menu.classList.add('flex', 'opacity-100');
+    iconBurger.classList.add('hidden');
+    iconClose.classList.remove('hidden');
+    document.body.classList.add('no-scroll');
+  } else {
+    menu.classList.add('opacity-0', 'pointer-events-none');
+    setTimeout(() => {
+      menu.classList.add('hidden');
+      menu.classList.remove('flex');
+    }, 300);
+    iconBurger.classList.remove('hidden');
+    iconClose.classList.add('hidden');
+    document.body.classList.remove('no-scroll');
+  }
+  btn.setAttribute('aria-expanded', String(open));
+  btn.setAttribute('aria-label', open ? 'Закрити меню' : 'Відкрити меню');
+}
+
+btn.addEventListener('click', () => {
+  const isOpen = !menu.classList.contains('hidden') && menu.classList.contains('opacity-100');
+  setMenu(!isOpen);
+});
+
+menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+// Fancybox Initializer
+document.addEventListener('DOMContentLoaded', () => {
+    Fancybox.bind("[data-fancybox]", {
+        Hash: false,
+        Thumbs: {
+            autoStart: false
+        },
+        Toolbar: {
+            display: {
+                left: ["infobar"],
+                right: ["slideshow", "download", "thumbs", "close"],
+            },
+        },
+        Images: {
+            Panzoom: {
+                maxScale: 3,
+            },
+        },
+    });
+});
+</script>
+</body>
+</html>

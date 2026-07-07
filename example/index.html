@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>СВІЖАК — свіжообсмажена кава. Смажимо цього тижня. Крапка.</title>
+<meta name="description" content="Свіжообсмажена кава з датою обсмаження на кожній пачці. Доставка Новою Поштою за 1–2 дні. Підписка −15%.">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Golos+Text:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style type="text/tailwindcss">
+@theme {
+  --color-bean:  #191210;
+  --color-ink:   #241B15;
+  --color-kraft: #E9DFCE;
+  --color-paper: #F5EFE3;
+  --color-heat:  #FF4D00;
+  --color-cream: #FFF9EE;
+  --font-display: "Unbounded", sans-serif;
+  --font-body: "Golos Text", sans-serif;
+  --font-stamp: "IBM Plex Mono", monospace;
+}
+</style>
+<style>
+  /* Marquee — pure CSS */
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .marquee-track { display: flex; width: max-content; animation: marquee 28s linear infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+  /* FAQ chevron rotation */
+  details[open] .chev { transform: rotate(45deg); }
+  .chev { transition: transform .2s ease; }
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  /* Focus visibility */
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 3px solid #FF4D00; outline-offset: 3px; border-radius: 4px;
+  }
+  /* Hero: staggered load-in */
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  .rise { animation: rise .7s cubic-bezier(.2,.7,.2,1) both; }
+  .rise-1 { animation-delay: .05s; } .rise-2 { animation-delay: .15s; }
+  .rise-3 { animation-delay: .28s; } .rise-4 { animation-delay: .4s; }
+  /* Pulsing live dot */
+  @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+  .live-dot { animation: pulse-dot 1.6s ease-in-out infinite; }
+  /* Full-screen mobile menu */
+  #mobileMenu { transition: opacity .25s ease, visibility .25s ease; }
+  #mobileMenu.menu-closed { opacity: 0; visibility: hidden; pointer-events: none; }
+  #mobileMenu .m-link { opacity: 0; transform: translateY(14px); transition: opacity .35s ease, transform .35s cubic-bezier(.2,.7,.2,1); }
+  #mobileMenu.menu-open .m-link { opacity: 1; transform: none; }
+  #mobileMenu.menu-open .m-link:nth-child(1) { transition-delay: .05s; }
+  #mobileMenu.menu-open .m-link:nth-child(2) { transition-delay: .11s; }
+  #mobileMenu.menu-open .m-link:nth-child(3) { transition-delay: .17s; }
+  #mobileMenu.menu-open .m-link:nth-child(4) { transition-delay: .23s; }
+  #mobileMenu.menu-open .m-link:nth-child(5) { transition-delay: .29s; }
+  body.no-scroll { overflow: hidden; }
+  @media (prefers-reduced-motion: reduce) {
+    .rise, .live-dot { animation: none; }
+    #mobileMenu, #mobileMenu .m-link { transition: none; }
+  }
+</style>
+</head>
+<body class="bg-bean text-cream font-body antialiased">
+
+<!-- ============ NAV ============ -->
+<header class="sticky top-0 z-[70] bg-bean/90 backdrop-blur border-b border-cream/10">
+  <nav class="mx-auto max-w-6xl px-4 sm:px-6 flex items-center justify-between h-16">
+    <a href="#top" class="font-display font-black text-lg tracking-tight">СВІЖАК<span class="text-heat">.</span></a>
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+      <a href="#smaky" class="hover:text-heat transition-colors">Смаки</a>
+      <a href="#chomu" class="hover:text-heat transition-colors">Чому свіжість</a>
+      <a href="#pidpyska" class="hover:text-heat transition-colors">Підписка</a>
+      <a href="#faq" class="hover:text-heat transition-colors">FAQ</a>
+      <a href="#smaky" class="bg-heat text-bean font-semibold px-5 py-2.5 rounded-full hover:bg-cream transition-colors">Обрати каву</a>
+    </div>
+    <button id="menuBtn" aria-label="Відкрити меню" aria-expanded="false" class="md:hidden p-2 relative z-[60]">
+      <svg id="iconBurger" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg id="iconClose" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </nav>
+</header>
+
+<!-- Full-screen mobile menu -->
+<div id="mobileMenu" class="menu-closed md:hidden fixed inset-0 z-[60] bg-bean flex flex-col">
+  <div class="h-16 shrink-0"></div>
+  <nav class="flex-1 flex flex-col justify-center px-6 gap-2">
+    <a href="#smaky" class="m-link group flex items-baseline gap-4 py-3 border-b border-cream/10">
+      <span class="font-stamp text-xs text-heat">01</span>
+      <span class="font-display font-bold uppercase text-3xl group-active:text-heat">Смаки</span>
+    </a>
+    <a href="#chomu" class="m-link group flex items-baseline gap-4 py-3 border-b border-cream/10">
+      <span class="font-stamp text-xs text-heat">02</span>
+      <span class="font-display font-bold uppercase text-3xl group-active:text-heat">Чому свіжість</span>
+    </a>
+    <a href="#pidpyska" class="m-link group flex items-baseline gap-4 py-3 border-b border-cream/10">
+      <span class="font-stamp text-xs text-heat">03</span>
+      <span class="font-display font-bold uppercase text-3xl group-active:text-heat">Підписка</span>
+    </a>
+    <a href="#faq" class="m-link group flex items-baseline gap-4 py-3 border-b border-cream/10">
+      <span class="font-stamp text-xs text-heat">04</span>
+      <span class="font-display font-bold uppercase text-3xl group-active:text-heat">FAQ</span>
+    </a>
+    <a href="#zamovyty" class="m-link mt-6 bg-heat text-bean font-semibold text-center px-6 py-4 rounded-full text-lg">Замовити каву</a>
+  </nav>
+  <div class="shrink-0 px-6 pb-8 flex items-center justify-between font-stamp text-xs text-cream/40 tracking-widest uppercase">
+    <span>Instagram · Telegram</span>
+    <span>Смажимо цього тижня ✳</span>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section id="top" class="relative overflow-hidden">
+  <!-- Hero Background Image -->
+  <div class="absolute inset-0 z-0">
+    <img src="/hero.jpg" alt="Кавові зерна" class="w-full h-full object-cover opacity-20 mix-blend-screen scale-105 animate-[pulse-dot_10s_ease-in-out_infinite]">
+    <div class="absolute inset-0 bg-gradient-to-b from-bean/40 via-bean/90 to-bean"></div>
+  </div>
+  <!-- Ambient roast glow -->
+  <div aria-hidden="true" class="absolute -top-32 -right-32 w-[28rem] h-[28rem] sm:w-[40rem] sm:h-[40rem] rounded-full bg-heat opacity-[0.25] blur-3xl pointer-events-none z-0"></div>
+  <div class="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 pt-12 sm:pt-20 pb-10 sm:pb-24">
+    <p class="rise rise-1 inline-flex items-center gap-2.5 border border-cream/20 rounded-full px-4 py-2 font-stamp text-[11px] sm:text-sm tracking-[0.18em] uppercase text-cream/80 bg-bean/50 backdrop-blur-sm">
+      <span class="live-dot w-2 h-2 rounded-full bg-heat shrink-0"></span>
+      Приймаємо замовлення на найближче обсмаження
+    </p>
+    <h1 class="rise rise-2 mt-7 sm:mt-9 font-display font-black leading-[1.02] text-[clamp(2.4rem,8vw,6rem)] uppercase">
+      Смажимо<br><span class="inline-block bg-heat text-bean px-3 sm:px-4 -skew-x-3">цього тижня.</span><br>Крапка.
+    </h1>
+    <p class="rise rise-3 mt-6 sm:mt-8 max-w-xl text-cream/80 text-base sm:text-lg">
+      Кава з полиці супермаркету обсмажена пів року тому. Наша — під ваше замовлення. Дата обсмаження надрукована на кожній пачці, і нам не соромно.
+    </p>
+    <div class="rise rise-3 mt-8 sm:mt-10 flex flex-col sm:flex-row gap-4">
+      <a href="#smaky" class="bg-heat text-bean font-semibold text-center px-8 py-4 rounded-full text-lg hover:bg-cream hover:scale-105 hover:shadow-lg hover:shadow-heat/20 transition-all duration-300">Обрати свій смак</a>
+      <a href="#pidpyska" class="border border-cream/30 text-center px-8 py-4 rounded-full text-lg hover:border-heat hover:text-heat hover:bg-heat/10 hover:scale-105 transition-all duration-300 backdrop-blur-sm">Підписка −15%</a>
+    </div>
+
+    <!-- Freshness data row -->
+    <dl class="rise rise-4 mt-12 sm:mt-16 grid grid-cols-3 gap-4 sm:gap-8 border-t border-cream/15 pt-6 max-w-2xl">
+      <div>
+        <dt class="font-stamp text-[10px] sm:text-xs tracking-widest uppercase text-cream/45">Останнє обсмаження</dt>
+        <dd class="mt-1 font-stamp text-lg sm:text-2xl text-heat" id="roastDate">03.07</dd>
+      </div>
+      <div>
+        <dt class="font-stamp text-[10px] sm:text-xs tracking-widest uppercase text-cream/45">Доставка НП</dt>
+        <dd class="mt-1 font-stamp text-lg sm:text-2xl">1–2 дні</dd>
+      </div>
+      <div>
+        <dt class="font-stamp text-[10px] sm:text-xs tracking-widest uppercase text-cream/45">Смаків у лінійці</dt>
+        <dd class="mt-1 font-stamp text-lg sm:text-2xl">3</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="bg-heat text-bean overflow-hidden py-3 border-y-2 border-bean" aria-hidden="true">
+  <div class="marquee-track font-stamp text-sm sm:text-base font-medium">
+    <span class="flex gap-8 pr-8 whitespace-nowrap">
+      <span>СВІЖІСТЬ — ЦЕ НЕ МАРКЕТИНГ, ЦЕ ДАТА</span><span>✳</span>
+      <span>СМАЖИМО ПІД ЗАМОВЛЕННЯ</span><span>✳</span>
+      <span>ВАМ ЇДЕ КАВА НЕ СТАРША 5 ДНІВ</span><span>✳</span>
+      <span>БЕЗ СНОБІЗМУ І ЛАТИНСЬКИХ ТЕРМІНІВ</span><span>✳</span>
+    </span>
+    <span class="flex gap-8 pr-8 whitespace-nowrap">
+      <span>СВІЖІСТЬ — ЦЕ НЕ МАРКЕТИНГ, ЦЕ ДАТА</span><span>✳</span>
+      <span>СМАЖИМО ПІД ЗАМОВЛЕННЯ</span><span>✳</span>
+      <span>ВАМ ЇДЕ КАВА НЕ СТАРША 5 ДНІВ</span><span>✳</span>
+      <span>БЕЗ СНОБІЗМУ І ЛАТИНСЬКИХ ТЕРМІНІВ</span><span>✳</span>
+    </span>
+  </div>
+</div>
+
+<!-- ============ SKU CARDS ============ -->
+<section id="smaky" class="bg-paper text-ink">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-16 sm:py-24">
+    <h2 class="font-display font-bold uppercase text-[clamp(1.8rem,5vw,3.2rem)] leading-tight">Три смаки.<br>Оберете за 10 секунд.</h2>
+    <p class="mt-4 max-w-lg text-ink/70">Без дегустаційних нотаток на пів сторінки. Просто скажіть, як ви п'єте каву — решту зробили ми.</p>
+
+    <div class="mt-10 sm:mt-14 grid gap-6 md:grid-cols-3">
+      <!-- SKU 1 -->
+      <article class="group bg-cream rounded-3xl p-6 sm:p-8 border-2 border-ink/10 hover:border-heat hover:shadow-2xl hover:shadow-heat/15 transition-all duration-300 hover:-translate-y-2 flex flex-col overflow-hidden relative">
+        <div class="mb-6 -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 h-56 overflow-hidden relative">
+          <img src="/abs_base.jpg" alt="Абстрактний шоколадний профіль" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-cream via-cream/20 to-transparent"></div>
+        </div>
+        <div class="font-stamp text-xs tracking-widest text-ink/50 uppercase relative z-10">№1 · для еспресо й молока</div>
+        <h3 class="font-display font-bold text-2xl mt-3 uppercase relative z-10">Шоколадна</h3>
+        <p class="mt-3 text-ink/70 flex-1">Бразилія + Колумбія, середнє обсмаження. Шоколад, горіх, карамель. Не кислить. Найбезпечніший вибір — з неї починають.</p>
+        <div class="mt-6 flex items-end justify-between">
+          <div>
+            <div class="text-3xl font-semibold">420 грн</div>
+            <div class="font-stamp text-xs text-ink/50">250 г · зерно або помел</div>
+          </div>
+          <a href="https://t.me/svizhak_coffee?text=Привіт!%20Хочу%20замовити%20каву%20«Шоколадна»%20(250г).%20Куди%20оплачувати?" target="_blank" class="bg-ink text-cream px-5 py-3 rounded-full font-medium group-hover:bg-heat group-hover:text-bean transition-colors">Купити</a>
+        </div>
+      </article>
+      <!-- SKU 2 -->
+      <article class="group bg-cream rounded-3xl p-6 sm:p-8 border-2 border-ink/10 hover:border-heat hover:shadow-2xl hover:shadow-heat/15 transition-all duration-300 hover:-translate-y-2 flex flex-col overflow-hidden relative">
+        <div class="mb-6 -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 h-56 overflow-hidden relative">
+          <img src="/abs_bright.jpg" alt="Абстрактний фруктовий профіль" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-cream via-cream/20 to-transparent"></div>
+        </div>
+        <div class="font-stamp text-xs tracking-widest text-ink/50 uppercase relative z-10">№2 · для фільтра і чорної</div>
+        <h3 class="font-display font-bold text-2xl mt-3 uppercase relative z-10">Яскрава</h3>
+        <p class="mt-3 text-ink/70 flex-1">Ефіопія, світле обсмаження. Цитрус, ягоди, квіти. Для тих, хто вже спробував «Шоколадну» і хоче пригод.</p>
+        <div class="mt-6 flex items-end justify-between">
+          <div>
+            <div class="text-3xl font-semibold">480 грн</div>
+            <div class="font-stamp text-xs text-ink/50">250 г · зерно або помел</div>
+          </div>
+          <a href="https://t.me/svizhak_coffee?text=Привіт!%20Хочу%20замовити%20каву%20«Яскрава»%20(250г).%20Куди%20оплачувати?" target="_blank" class="bg-ink text-cream px-5 py-3 rounded-full font-medium group-hover:bg-heat group-hover:text-bean transition-colors">Купити</a>
+        </div>
+      </article>
+      <!-- SKU 3 -->
+      <article class="group bg-cream rounded-3xl p-6 sm:p-8 border-2 border-ink/10 hover:border-heat hover:shadow-2xl hover:shadow-heat/15 transition-all duration-300 hover:-translate-y-2 flex flex-col overflow-hidden relative">
+        <div class="mb-6 -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 h-56 overflow-hidden relative">
+          <img src="/abs_strong.jpg" alt="Абстрактний насичений профіль" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-cream via-cream/20 to-transparent"></div>
+        </div>
+        <div class="font-stamp text-xs tracking-widest text-ink/50 uppercase relative z-10">№3 · щоб прокинутись</div>
+        <h3 class="font-display font-bold text-2xl mt-3 uppercase relative z-10">Міцна</h3>
+        <p class="mt-3 text-ink/70 flex-1">Арабіка + 15% індійської робусти, темніше обсмаження. Щільна, гірка, з густою кремою. Ранкова, без компромісів.</p>
+        <div class="mt-6 flex items-end justify-between">
+          <div>
+            <div class="text-3xl font-semibold">420 грн</div>
+            <div class="font-stamp text-xs text-ink/50">250 г · зерно або помел</div>
+          </div>
+          <a href="https://t.me/svizhak_coffee?text=Привіт!%20Хочу%20замовити%20каву%20«Міцна»%20(250г).%20Куди%20оплачувати?" target="_blank" class="bg-ink text-cream px-5 py-3 rounded-full font-medium group-hover:bg-heat group-hover:text-bean transition-colors">Купити</a>
+        </div>
+      </article>
+    </div>
+    <p class="mt-8 font-stamp text-sm text-ink/60">✳ Безкоштовна доставка від 700 грн — це дві пачки.</p>
+  </div>
+</section>
+
+<!-- ============ WHY FRESHNESS ============ -->
+<section id="chomu" class="bg-kraft text-ink">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-16 sm:py-24 grid gap-10 md:grid-cols-2 md:items-center">
+    <div>
+      <h2 class="font-display font-bold uppercase text-[clamp(1.8rem,5vw,3.2rem)] leading-tight">Чому дата важливіша<br>за бренд</h2>
+      <p class="mt-5 text-ink/75 max-w-md">Через 2–3 місяці після обсмаження кава втрачає більшість аромату — незалежно від ціни й імені на пачці. Тому на нашій пачці головне — не логотип, а штамп із датою.</p>
+      <ul class="mt-8 space-y-4">
+        <li class="flex gap-4"><span class="font-stamp text-heat font-medium shrink-0">01</span><span>Приймаємо замовлення → партія їде в обсмаження. Не навпаки.</span></li>
+        <li class="flex gap-4"><span class="font-stamp text-heat font-medium shrink-0">02</span><span>Відправляємо не пізніше 5 днів від дати обсмаження.</span></li>
+        <li class="flex gap-4"><span class="font-stamp text-heat font-medium shrink-0">03</span><span>Пік смаку — з 7 по 30 день. Ви п'єте каву саме в цьому вікні.</span></li>
+      </ul>
+    </div>
+    <!-- Freshness comparison card -->
+    <div class="bg-bean text-cream rounded-3xl p-6 sm:p-10">
+      <div class="font-stamp text-xs tracking-widest text-cream/50 uppercase mb-6">Вік кави на момент першої чашки</div>
+      <div class="space-y-6">
+        <div>
+          <div class="flex justify-between text-sm mb-2"><span>Супермаркет</span><span class="font-stamp text-cream/60">~180+ днів</span></div>
+          <div class="h-3 rounded-full bg-cream/10"><div class="h-3 rounded-full bg-cream/30 w-full"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-2"><span>Онлайн-магазин зі складом</span><span class="font-stamp text-cream/60">~30–90 днів</span></div>
+          <div class="h-3 rounded-full bg-cream/10"><div class="h-3 rounded-full bg-cream/40 w-1/2"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-2"><span class="font-semibold">СВІЖАК</span><span class="font-stamp text-heat">3–7 днів</span></div>
+          <div class="h-3 rounded-full bg-cream/10"><div class="h-3 rounded-full bg-heat w-[8%] min-w-[24px]"></div></div>
+        </div>
+      </div>
+      <p class="mt-8 font-stamp text-xs text-cream/50">✳ Орієнтовні середні значення по ринку</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SUBSCRIPTION ============ -->
+<section id="pidpyska" class="bg-bean">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-16 sm:py-24">
+    <div class="max-w-2xl">
+      <div class="font-stamp text-heat text-xs tracking-[0.25em] uppercase mb-4">Підписка</div>
+      <h2 class="font-display font-bold uppercase text-[clamp(1.6rem,4.5vw,2.8rem)] leading-tight">Кава закінчується завжди раптово</h2>
+      <p class="mt-4 text-cream/75">Підписка це лікує: свіжа кава сама приїжджає Новою Поштою. Смак можна міняти щомісяця, підписку — ставити на паузу одним повідомленням. Знижка діє назавжди.</p>
+    </div>
+
+    <div class="mt-10 sm:mt-14 grid gap-6 md:grid-cols-3 md:items-stretch">
+      <!-- Plan 1: Соло -->
+      <article class="rounded-3xl border-2 border-cream/15 p-6 sm:p-8 flex flex-col hover:border-heat transition-colors">
+        <div class="font-stamp text-xs tracking-widest uppercase text-cream/50">Соло</div>
+        <h3 class="font-display font-bold text-2xl mt-2 uppercase">250 г / міс</h3>
+        <p class="mt-3 text-sm text-cream/65 flex-1">1–2 чашки на день. Одна пачка на вибір, щомісяця можна брати інший смак.</p>
+        <div class="mt-6">
+          <span class="text-4xl font-semibold">357</span> <span class="text-cream/60">грн/міс</span>
+          <div class="font-stamp text-xs text-cream/40 mt-1"><span class="line-through">420 грн</span> · −15%</div>
+        </div>
+        <a href="https://t.me/svizhak_coffee?text=Привіт!%20Хочу%20оформити%20підписку%20«Соло»%20(250г/міс)." target="_blank" class="mt-6 block text-center border border-cream/30 px-6 py-3.5 rounded-full font-medium hover:border-heat hover:text-heat transition-colors">Обрати «Соло»</a>
+      </article>
+
+      <!-- Plan 2: Дует (highlighted) -->
+      <article class="relative rounded-3xl border-2 border-heat bg-heat/5 p-6 sm:p-8 flex flex-col">
+        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-heat text-bean font-stamp text-xs tracking-widest uppercase px-4 py-1.5 rounded-full whitespace-nowrap">Найпопулярніша</div>
+        <div class="font-stamp text-xs tracking-widest uppercase text-cream/50">Дует</div>
+        <h3 class="font-display font-bold text-2xl mt-2 uppercase">2 × 250 г / міс</h3>
+        <p class="mt-3 text-sm text-cream/65 flex-1">3–4 чашки на день або кава на двох. Дві пачки — однакові чи різні смаки, як хочете.</p>
+        <div class="mt-6">
+          <span class="text-4xl font-semibold text-heat">714</span> <span class="text-cream/60">грн/міс</span>
+          <div class="font-stamp text-xs text-cream/40 mt-1"><span class="line-through">840 грн</span> · −15% + безкоштовна доставка</div>
+        </div>
+        <a href="https://t.me/svizhak_coffee?text=Привіт!%20Хочу%20оформити%20підписку%20«Дует»%20(2x250г/міс)." target="_blank" class="mt-6 block text-center bg-heat text-bean font-semibold px-6 py-3.5 rounded-full hover:bg-cream transition-colors">Обрати «Дует»</a>
+      </article>
+
+      <!-- Plan 3: Запас -->
+      <article class="rounded-3xl border-2 border-cream/15 p-6 sm:p-8 flex flex-col hover:border-heat transition-colors">
+        <div class="font-stamp text-xs tracking-widest uppercase text-cream/50">Запас</div>
+        <h3 class="font-display font-bold text-2xl mt-2 uppercase">1 кг / міс</h3>
+        <p class="mt-3 text-sm text-cream/65 flex-1">Для великої родини чи офісу. Зерно або помел під вашу кавоварку, найнижча ціна за грам.</p>
+        <div class="mt-6">
+          <span class="text-4xl font-semibold">1 180</span> <span class="text-cream/60">грн/міс</span>
+          <div class="font-stamp text-xs text-cream/40 mt-1"><span class="line-through">1 390 грн</span> · −15% + безкоштовна доставка</div>
+        </div>
+        <a href="https://t.me/svizhak_coffee?text=Привіт!%20Хочу%20оформити%20підписку%20«Запас»%20(1кг/міс)." target="_blank" class="mt-6 block text-center border border-cream/30 px-6 py-3.5 rounded-full font-medium hover:border-heat hover:text-heat transition-colors">Обрати «Запас»</a>
+      </article>
+    </div>
+
+    <ul class="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-sm text-cream/70">
+      <li class="flex gap-2"><span class="text-heat">✳</span>Пауза чи скасування в один клік, без питань</li>
+      <li class="flex gap-2"><span class="text-heat">✳</span>Зміна смаку щомісяця</li>
+      <li class="flex gap-2"><span class="text-heat">✳</span>Перша відправка — протягом 5 днів від обсмаження</li>
+      <li class="flex gap-2"><span class="text-heat">✳</span>Офісам від 3 кг/міс — окремі умови, напишіть нам</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ ORDER / CONTACT ============ -->
+<section id="zamovyty" class="bg-heat text-bean">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-14 sm:py-20 md:flex md:items-center md:justify-between md:gap-10">
+    <div>
+      <h2 class="font-display font-bold uppercase text-[clamp(1.6rem,4.5vw,2.6rem)] leading-tight">Замовити — за 30 секунд</h2>
+      <p class="mt-3 max-w-lg text-bean font-medium">Напишіть нам смак і формат (пачка чи підписка) — підтвердимо, надішлемо оплату і поставимо партію в обсмаження. Без реєстрацій і кабінетів.</p>
+    </div>
+    <div class="mt-8 md:mt-0 flex flex-col sm:flex-row gap-4 shrink-0">
+      <!-- TODO: замінити username на реальні акаунти -->
+      <a href="https://ig.me/m/USERNAME" class="bg-bean text-cream text-center font-semibold px-8 py-4 rounded-full hover:bg-ink transition-colors">Написати в Instagram</a>
+      <a href="https://t.me/USERNAME" class="border-2 border-bean text-center font-semibold px-8 py-4 rounded-full hover:bg-bean hover:text-cream transition-colors">Написати в Telegram</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="bg-paper text-ink">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-16 sm:py-24">
+    <h2 class="font-display font-bold uppercase text-[clamp(1.8rem,5vw,3rem)] leading-tight">Що кажуть люди</h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      <figure class="bg-cream rounded-3xl p-6 border-2 border-ink/10">
+        <blockquote class="text-ink/80">«Замовила "Шоколадну" в понеділок, у середу вже пила. Дата обсмаження — субота. Це якась магія проти магазинної»</blockquote>
+        <figcaption class="mt-4 font-stamp text-xs text-ink/50 uppercase tracking-wider">Оля, Київ · моко-пот</figcaption>
+      </figure>
+      <figure class="bg-cream rounded-3xl p-6 border-2 border-ink/10">
+        <blockquote class="text-ink/80">«"Міцна" — це те, чим має бути ранкова кава. Крема як у кав'ярні. Взяв підписку, щоб не думати»</blockquote>
+        <figcaption class="mt-4 font-stamp text-xs text-ink/50 uppercase tracking-wider">Андрій, Львів · еспресо</figcaption>
+      </figure>
+      <figure class="bg-cream rounded-3xl p-6 border-2 border-ink/10">
+        <blockquote class="text-ink/80">«Не розбираюсь у каві взагалі. Обрала за описом "для фільтра" — і вперше зрозуміла, про які "ягоди" всі говорять»</blockquote>
+        <figcaption class="mt-4 font-stamp text-xs text-ink/50 uppercase tracking-wider">Марина, Дніпро · фільтр</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="bg-bean">
+  <div class="mx-auto max-w-3xl px-4 sm:px-6 py-16 sm:py-24">
+    <h2 class="font-display font-bold uppercase text-[clamp(1.8rem,5vw,3rem)] leading-tight">Питання, які нам ставлять</h2>
+    <div class="mt-10 divide-y divide-cream/10 border-y border-cream/10">
+      <details class="group">
+        <summary class="flex items-center justify-between py-5 font-medium text-lg">Скільки їде доставка?<span class="chev text-heat text-2xl leading-none">+</span></summary>
+        <p class="pb-5 text-cream/70">Новою Поштою — 1–2 дні по Україні. Відправляємо в день обсмаження або наступного. Від 700 грн доставка безкоштовна.</p>
+      </details>
+      <details class="group">
+        <summary class="flex items-center justify-between py-5 font-medium text-lg">Можна мелену?<span class="chev text-heat text-2xl leading-none">+</span></summary>
+        <p class="pb-5 text-cream/70">Так. При замовленні оберіть свій спосіб заварювання (еспресо, гейзер, фільтр, турка) — змелемо саме під нього безкоштовно.</p>
+      </details>
+      <details class="group">
+        <summary class="flex items-center justify-between py-5 font-medium text-lg">А якщо смак не зайде?<span class="chev text-heat text-2xl leading-none">+</span></summary>
+        <p class="pb-5 text-cream/70">Напишіть нам — безкоштовно замінимо на інший смак у наступному замовленні. Без чеків і пояснювальних записок.</p>
+      </details>
+      <details class="group">
+        <summary class="flex items-center justify-between py-5 font-medium text-lg">Як оплатити?<span class="chev text-heat text-2xl leading-none">+</span></summary>
+        <p class="pb-5 text-cream/70">Картка онлайн (Apple Pay / Google Pay) або накладений платіж на Новій Пошті. Фіскальний чек надсилаємо автоматично.</p>
+      </details>
+      <details class="group">
+        <summary class="flex items-center justify-between py-5 font-medium text-lg">Кава для офісу?<span class="chev text-heat text-2xl leading-none">+</span></summary>
+        <p class="pb-5 text-cream/70">Так, працюємо з офісами: від 3 кг/міс — оптова ціна і безкоштовна щомісячна доставка. Напишіть нам, надішлемо пачку на пробу для команди.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-bean border-t border-cream/10">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-12 grid gap-8 sm:grid-cols-3">
+    <div>
+      <div class="font-display font-black text-lg">СВІЖАК<span class="text-heat">.</span></div>
+      <p class="mt-3 text-sm text-cream/60 max-w-xs">Свіжообсмажена кава з чесною датою на пачці. Смажимо в Україні.</p>
+    </div>
+    <div class="text-sm">
+      <div class="font-stamp text-xs tracking-widest uppercase text-cream/40 mb-3">Контакти</div>
+      <ul class="space-y-2 text-cream/75">
+        <li><a href="https://instagram.com/" class="hover:text-heat transition-colors">Instagram</a></li>
+        <li><a href="https://t.me/" class="hover:text-heat transition-colors">Telegram</a></li>
+        <li><a href="mailto:hello@svizhak.ua" class="hover:text-heat transition-colors">hello@svizhak.ua</a></li>
+      </ul>
+    </div>
+    <div class="text-sm">
+      <div class="font-stamp text-xs tracking-widest uppercase text-cream/40 mb-3">Реквізити</div>
+      <p class="text-cream/60">ФОП Прізвище І. Б.<br>РНОКПП 0000000000<br>Україна</p>
+    </div>
+  </div>
+  <div class="border-t border-cream/10 py-5 text-center font-stamp text-xs text-cream/40">
+    © 2026 СВІЖАК · Смажимо цього тижня. Крапка.
+  </div>
+</footer>
+
+<script>
+// Full-screen mobile menu
+const btn = document.getElementById('menuBtn');
+const menu = document.getElementById('mobileMenu');
+const iconBurger = document.getElementById('iconBurger');
+const iconClose = document.getElementById('iconClose');
+
+function setMenu(open) {
+  menu.classList.toggle('menu-open', open);
+  menu.classList.toggle('menu-closed', !open);
+  iconBurger.classList.toggle('hidden', open);
+  iconClose.classList.toggle('hidden', !open);
+  document.body.classList.toggle('no-scroll', open);
+  btn.setAttribute('aria-expanded', String(open));
+  btn.setAttribute('aria-label', open ? 'Закрити меню' : 'Відкрити меню');
+}
+btn.addEventListener('click', () => setMenu(!menu.classList.contains('menu-open')));
+menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+// Live roast date stamp: last "roast day" (пн або чт цього тижня)
+(function () {
+  const now = new Date();
+  const day = now.getDay(); // 0 нд ... 6 сб
+  // останній день обсмаження: чт (4) або пн (1)
+  let diff;
+  if (day >= 4) diff = day - 4;
+  else if (day >= 1) diff = day - 1;
+  else diff = 3; // неділя -> минулий четвер
+  const roast = new Date(now);
+  roast.setDate(now.getDate() - diff);
+  const dd = String(roast.getDate()).padStart(2, '0');
+  const mm = String(roast.getMonth() + 1).padStart(2, '0');
+  document.getElementById('roastDate').textContent = dd + '.' + mm;
+})();
+</script>
+</body>
+</html>
